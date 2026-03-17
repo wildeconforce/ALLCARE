@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>올케어 | 잠실 프리미엄 이동 케어 서비스</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --cream: #f8f5ef;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --sage: #6b8f71;
+    --rust: #c0622a;
+    --warm-gray: #8a8070;
+    --card-bg: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: #e8e4d9;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 40px 60px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,143,113,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,143,113,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--sage);
+    border: 1px solid rgba(107,143,113,0.4);
+    padding: 8px 16px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+    opacity: 0;
+  }
+
+  .hero-title span {
+    color: var(--sage);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(26,26,46,0.6);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primary:hover {
+    background: #5a7a60;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: rgba(26,26,46,0.7);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 16px 32px;
+    border: 1px solid rgba(26,26,46,0.2);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--sage);
+    color: var(--sage);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(26,26,46,0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: rgba(26,26,46,0.2);
+  }
+
+  .hero-stats {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    display: flex;
+    gap: 40px;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+    opacity: 0;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--sage);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: rgba(26,26,46,0.4);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 100px 40px;
+    background: var(--cream);
+  }
+
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    background: var(--ink);
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+
+  .service-card:hover {
+    background: var(--ink);
+  }
+
+  .service-card:hover .service-title,
+  .service-card:hover .service-desc,
+  .service-card:hover .service-price-label {
+    color: rgba(255,255,255,0.9);
+  }
+
+  .service-card:hover .service-icon {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--gold);
+  }
+
+  .service-card:hover .service-price {
+    color: var(--gold);
+  }
+
+  .service-card:hover .service-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 32px;
+    transition: all 0.4s ease;
+  }
+
+  .service-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    transition: color 0.4s ease;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--warm-gray);
+    margin-bottom: 32px;
+    transition: color 0.4s ease;
+  }
+
+  .service-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.4s ease;
+  }
+
+  .service-price-label {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 6px;
+    transition: color 0.4s ease;
+  }
+
+  .service-arrow {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    font-size: 20px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s ease;
+    color: var(--gold);
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 32px;
+    transition: all 0.4s ease;
+  }
+
+  .service-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    transition: color 0.4s ease;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--warm-gray);
+    margin-bottom: 32px;
+    transition: color 0.4s ease;
+  }
+
+  .service-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.4s ease;
+  }
+
+  .service-price-label {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 4px;
+    transition: color 0.4s ease;
+  }
+
+  .service-arrow {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    font-size: 20px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s ease;
+    color: var(--gold);
+  }
+
+  /* WHY */
+  .why {
+    padding: 100px 40px;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .why .section-title {
+    color: #fff;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 48px;
+    margin-top: 60px;
+  }
+
+  .why-item {
+    padding: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .why-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .why-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(201,168,76,0.3);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .why-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .why-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* SCHEDULE */
+  .schedule {
+    padding: 100px 40px;
+    background: var(--cream);
+  }
+
+  .schedule-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .schedule-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 32px;
+    background: #fff;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .schedule-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .schedule-item:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .schedule-item:hover .schedule-time,
+  .schedule-item:hover .schedule-label {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .schedule-item:hover .schedule-name {
+    color: #fff;
+  }
+
+  .schedule-item:hover .schedule-price {
+    color: var(--gold);
+  }
+
+  .schedule-time {
+    font-size: 12px;
+    color: var(--warm-gray);
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+
+  .schedule-info {}
+
+  .schedule-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .schedule-label {
+    font-size: 12px;
+    color: var(--warm-gray);
+    transition: color 0.3s ease;
+  }
+
+  .schedule-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+    transition: color 0.3s ease;
+  }
+
+  /* AREA */
+  .area {
+    padding: 100px 40px;
+    background: var(--sage);
+    color: #fff;
+    text-align: center;
+  }
+
+  .area .section-tag {
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .area .section-tag::before {
+    background: rgba(255,255,255,0.5);
+  }
+
+  .area .section-title {
+    color: #fff;
+  }
+
+  .area-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .area-tag {
+    padding: 10px 24px;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .area-tag:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .area-tag.featured {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.6);
+    font-weight: 700;
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 100px 40px;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+  }
+
+  .contact .section-title {
+    color: #fff;
+    margin-bottom: 48px;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 32px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .contact-method:hover {
+    background: rgba(201,168,76,0.1);
+  }
+
+  .contact-method-icon {
+    font-size: 20px;
+    width: 48px;
+    text-align: center;
+  }
+
+  .contact-method-info {}
+
+  .contact-method-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .contact-method-value {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .contact-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 40px;
+    background: #0d0d1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .footer-info {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(232,228,217,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(107,143,113,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--sage);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: rgba(26,26,46,0.55);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--sage);
+  }
+
+  .nav-cta {
+    background: var(--sage) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    padding: 8px 20px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PRICE TABLE */
+  .price-table {
+    margin-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .service-card:hover .price-table {
+    border-top-color: rgba(255,255,255,0.1);
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 13px;
+    transition: all 0.4s ease;
+  }
+
+  .service-card:hover .price-row {
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  .price-row.highlight {
+    border-bottom: none;
+  }
+
+  .price-type {
+    color: var(--warm-gray);
+    transition: color 0.4s ease;
+  }
+
+  .service-card:hover .price-type {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .price-val {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    transition: color 0.4s ease;
+  }
+
+  .price-row.highlight .price-val {
+    color: var(--gold);
+  }
+
+  .service-card:hover .price-val {
+    color: rgba(255,255,255,0.9);
+  }
+
+  .service-card:hover .price-row.highlight .price-val {
+    color: var(--gold);
+  }
+
+  /* PRICE CATEGORY */
+  .price-category-label {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  /* NOTICE BOX */
+  .notice-box {
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--warm-gray);
+    margin-bottom: 16px;
+  }
+
+  .notice-box strong {
+    color: var(--ink);
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,20,0.85);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--cream);
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    background: var(--ink);
+    padding: 32px 36px 28px;
+    position: relative;
+  }
+
+  .modal-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .modal-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .modal-price-hero {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--gold);
+    margin-top: 12px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .modal-body {
+    padding: 32px 36px;
+  }
+
+  .modal-section {
+    margin-bottom: 28px;
+  }
+
+  .modal-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .modal-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .modal-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .modal-checklist li::before {
+    content: '✓';
+    color: var(--sage);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .modal-checklist li.warn::before {
+    content: '!';
+    color: var(--rust);
+  }
+
+  .modal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .modal-detail-item {
+    background: #fff;
+    padding: 14px 16px;
+    border-left: 2px solid var(--gold);
+  }
+
+  .modal-detail-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--warm-gray);
+    margin-bottom: 4px;
+  }
+
+  .modal-detail-value {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .modal-cta {
+    background: var(--gold);
+    color: var(--ink);
+    width: 100%;
+    padding: 18px;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
+  .modal-cta:hover {
+    background: var(--gold-light);
+  }
+
+  .modal-note {
+    font-size: 12px;
+    color: var(--warm-gray);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  .clickable-row {
+    cursor: pointer;
+  }
+
+  .clickable-row:hover .schedule-name {
+    color: var(--gold);
+  }
+
+  .row-arrow {
+    color: var(--warm-gray);
+    font-size: 14px;
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .clickable-row:hover .row-arrow {
+    transform: translateX(4px);
+    color: var(--gold);
+  }
+
+  .service-card-clickable {
+    cursor: pointer;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 80px; }
+    .hero-stats { display: none; }
+    .services { padding: 60px 24px; }
+    .why { padding: 60px 24px; }
+    .schedule { padding: 60px 24px; }
+    .area { padding: 60px 24px; }
+    .contact { padding: 60px 24px; }
+    .schedule-item { grid-template-columns: 1fr auto; }
+    .schedule-time { display: none; }
+    footer { padding: 24px; }
+    .footer-info { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">올케어</a>
+  <ul class="nav-links">
+    <li><a href="#services">서비스</a></li>
+    <li><a href="#why">특장점</a></li>
+    <li><a href="#area">운행지역</a></li>
+    <li><a href="#contact" class="nav-cta">예약하기</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">잠실 프리미엄 이동 케어 서비스 · 올케어</div>
+  <h1 class="hero-title">
+    소중한 존재를<br>
+    <span>안전하게 모십니다</span>
+  </h1>
+  <p class="hero-sub">
+    픽업부터 귀가까지 <strong style="color:var(--gold)">올케어</strong>.<br>
+    반려동물 전용 픽업부터 어르신 병원 동행까지.<br>
+    예약제로 운영되는 잠실·송파 프리미엄 이동 서비스입니다.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#contact" class="btn-primary">카카오톡으로 예약</a>
+    <a href="#services" class="btn-secondary">서비스 보기 →</a>
+  </div>
+  <div class="hero-scroll">스크롤</div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">24h</div>
+      <div class="stat-label">전날까지 예약</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">SUV</div>
+      <div class="stat-label">싼타페 전용차량</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-tag">Services</div>
+    <h2 class="section-title">두 가지 전문 서비스</h2>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">🐾</div>
+      <div class="service-title">반려동물 이동 서비스</div>
+      <div class="service-desc">
+        동물병원·미용샵 픽업부터 귀가까지.<br>
+        대형견·고양이 모두 가능. 케이지 고정 완비.<br>
+        <strong style="color:var(--gold)">보호자 없이 단독 이동도 가능합니다.</strong>
+      </div>
+      <div class="service-price">4만원~</div>
+      <div class="service-price-label">단거리 기준 · 아래 요금표에서 클릭해 상세 확인</div>
+      <div class="service-arrow">→</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <div class="service-title">어르신 병원 동행 서비스</div>
+      <div class="service-desc">
+        <strong style="color:var(--gold)">자차 픽업 + 접수 + 대기 + 진료 보조 + 귀가</strong> 일체.<br>
+        교통비 추가 없음 — 명시 금액이 최종입니다.<br>
+        진료 내용 정리 후 보호자(자녀)께 전달.
+      </div>
+      <div class="service-price">10만원~</div>
+      <div class="service-price-label">기본 3시간 기준 · 아래 요금표에서 클릭해 상세 확인</div>
+      <div class="service-arrow">→</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🚗</div>
+      <div class="service-title">장거리 전국 운행</div>
+      <div class="service-desc">
+        서울 출발 전국 어디든 운행 가능.<br>
+        반려동물 동반 여행·귀성 이동·원정 진료.<br>
+        <strong style="color:var(--gold)">반려동물 단독 전국 탁송도 가능합니다.</strong>
+      </div>
+      <div class="service-price">15만원~</div>
+      <div class="service-price-label">수도권 외 편도 기준 · 거리에 따라 협의</div>
+      <div class="service-arrow">→</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-header">
+    <div class="section-tag" style="color:rgba(201,168,76,0.8)">Why Us</div>
+    <h2 class="section-title">케어무브를 선택하는 이유</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-title">예약제 전용 운영</div>
+      <div class="why-desc">즉흥 호출 없이 전날까지 예약만 받습니다. 스케줄을 미리 잡아두면 기다림 없이 정확한 시간에 픽업합니다.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-title">싼타페 전용 공간</div>
+      <div class="why-desc">넉넉한 SUV 공간으로 대형견, 다수 케이지, 휠체어도 무리 없이 탑승 가능합니다. 방수 커버 및 소독 완비.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-title">운행 후 사진 전송</div>
+      <div class="why-desc">반려동물 운행 후 상태 사진을 보호자께 전송합니다. 어르신 동행 후 진료 내용도 정리해 전달드립니다.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-title">정기 고객 월정액</div>
+      <div class="why-desc">동물병원 정기 방문, 재활 치료 정기 동행 등 월정액 패키지로 더 저렴하게 이용 가능합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule">
+  <div class="section-header">
+    <div class="section-tag">Price Guide</div>
+    <h2 class="section-title">전체 요금 한눈에 보기</h2>
+  </div>
+
+  <div class="price-category-label">🐾 반려동물 이동 서비스</div>
+  <div class="schedule-list">
+    <div class="schedule-item clickable-row" onclick="openModal('pet_short')">
+      <div class="schedule-time">단거리</div>
+      <div class="schedule-info">
+        <div class="schedule-name">10km 이내 픽업·귀가</div>
+        <div class="schedule-label">보호자 동반 / 잠실·송파 동물병원·미용샵</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">5만원</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('pet_solo')">
+      <div class="schedule-time">단독</div>
+      <div class="schedule-info">
+        <div class="schedule-name">반려동물 혼자 이동 (보호자 없음)</div>
+        <div class="schedule-label">픽업 후 목적지 인도 · 단거리 기준</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">4만원~</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('pet_mid')">
+      <div class="schedule-time">중거리</div>
+      <div class="schedule-info">
+        <div class="schedule-name">10~30km 이동</div>
+        <div class="schedule-label">강남·강동·성남·분당 포함</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">8만원~</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('pet_long')">
+      <div class="schedule-time">장거리</div>
+      <div class="schedule-info">
+        <div class="schedule-name">30km+ 전국 운행</div>
+        <div class="schedule-label">수도권 외 / 단독 탁송 포함</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">15만원~</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-category-label" style="margin-top:48px">🏥 어르신 병원 동행 서비스</div>
+  <div class="notice-box">
+    ✓ 아래 모든 요금은 <strong>자차 픽업 + 접수 도움 + 대기 + 진료 보조 + 귀가</strong>까지 일체 포함입니다.<br>
+    ✓ 교통비·주차비 등 추가 비용 없음 — 명시된 금액이 최종 금액입니다.
+  </div>
+  <div class="schedule-list">
+    <div class="schedule-item clickable-row" onclick="openModal('silver_basic')">
+      <div class="schedule-time">기본</div>
+      <div class="schedule-info">
+        <div class="schedule-name">기본 동행 (3시간 이내)</div>
+        <div class="schedule-label">픽업 → 접수·대기 → 진료 보조 → 귀가 → 진료내용 전달</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">10만원</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('silver_half')">
+      <div class="schedule-time">반일</div>
+      <div class="schedule-info">
+        <div class="schedule-name">반일 동행 (3~5시간)</div>
+        <div class="schedule-label">복수 검사·장시간 대기 포함</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">15만원</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('silver_major')">
+      <div class="schedule-time">원정</div>
+      <div class="schedule-info">
+        <div class="schedule-name">대형병원 원정 동행</div>
+        <div class="schedule-label">서울아산·삼성·세브란스 등 / 장거리 포함</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">20만원~</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+    <div class="schedule-item clickable-row" onclick="openModal('silver_monthly')">
+      <div class="schedule-time">월정액</div>
+      <div class="schedule-info">
+        <div class="schedule-name">정기 동행 패키지 (월 4회)</div>
+        <div class="schedule-label">재활·항암·투석 등 정기 병원 방문</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="schedule-price">40만원~</div>
+        <div class="row-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AREA -->
+<section class="area" id="area">
+  <div class="section-tag">운행 지역</div>
+  <h2 class="section-title">잠실·송파 중심<br>전국 장거리 운행</h2>
+  <div class="area-tags">
+    <div class="area-tag featured">잠실동</div>
+    <div class="area-tag featured">송파구</div>
+    <div class="area-tag featured">강남구</div>
+    <div class="area-tag">강동구</div>
+    <div class="area-tag">서초구</div>
+    <div class="area-tag">광진구</div>
+    <div class="area-tag">성남·분당</div>
+    <div class="area-tag">장거리 전국↗</div>
+  </div>
+</section>
+
+<!-- RESERVATION CALENDAR -->
+<section class="contact" id="contact">
+  <div style="max-width:800px">
+    <div class="section-tag">예약하기</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:8px">날짜와 시간을<br>직접 선택하세요</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:40px;line-height:1.8">
+      ✓ 예약 가능(초록) 날짜 클릭 → 시간 선택 → 30초 신청 완료<br>
+      ✓ 목·일 휴무 · 토요일 장거리 종일 운행
+    </p>
+
+    <div id="calWrap" style="background:var(--card-bg);border-radius:12px;padding:28px 24px">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <button onclick="rcChangeMonth(-1)" style="background:none;border:1px solid rgba(0,0,0,0.12);padding:6px 14px;cursor:pointer;border-radius:6px;font-size:14px;color:#555">← 이전</button>
+        <div id="rcTitle" style="font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:#1a1a2e"></div>
+        <button onclick="rcChangeMonth(1)" style="background:none;border:1px solid rgba(0,0,0,0.12);padding:6px 14px;cursor:pointer;border-radius:6px;font-size:14px;color:#555">다음 →</button>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#E1F5EE;border:1px solid #1D9E75;display:inline-block"></span>예약 가능</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#E6F1FB;border:1px solid #378ADD;display:inline-block"></span>토요일 장거리</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#FCEBEB;border:1px solid #E24B4A;display:inline-block"></span>마감</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#aaa"><span style="width:10px;height:10px;border-radius:2px;background:#eee;display:inline-block"></span>휴무</span>
+      </div>
+
+      <div id="rcGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">
+        <div style="text-align:center;font-size:11px;color:#E24B4A;padding:4px 0 8px;font-weight:500">일</div>
+        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">월</div>
+        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">화</div>
+        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">수</div>
+        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">목</div>
+        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">금</div>
+        <div style="text-align:center;font-size:11px;color:#378ADD;padding:4px 0 8px;font-weight:500">토</div>
+      </div>
+
+      <div id="rcSlots" style="margin-top:20px"></div>
+      <div id="rcResList" style="margin-top:12px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:32px">
+      <a href="tel:010-7472-5896" class="contact-method">
+        <div class="contact-method-icon">📞</div>
+        <div class="contact-method-info">
+          <div class="contact-method-label">CALL</div>
+          <div class="contact-method-value">010 - 7472 - 5896</div>
+        </div>
+      </a>
+      <a href="#" class="contact-method">
+        <div class="contact-method-icon">💬</div>
+        <div class="contact-method-info">
+          <div class="contact-method-label">KAKAO</div>
+          <div class="contact-method-value">카카오톡 채널 @올케어</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-note" style="margin-top:20px">
+      ✓ 예약은 이용일 전날까지 가능합니다<br>
+      ✓ 평일 운행: 오전 9시 ~ 오후 3시<br>
+      ✓ 토요일: 장거리·종일 운행 (별도 협의)
+    </div>
+  </div>
+</section>
+
+<style>
+.rc-day {
+  aspect-ratio:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:all 0.15s;
+  position:relative;
+}
+.rc-day:hover:not(.rc-closed):not(.rc-past) { border-color:#1D9E75; }
+.rc-day.rc-today { border-color:#6b8f71 !important; }
+.rc-day.rc-closed { opacity:0.25; cursor:default; }
+.rc-day.rc-past { opacity:0.2; cursor:default; }
+.rc-day.rc-available { background:#E1F5EE; }
+.rc-day.rc-saturday { background:#E6F1FB; }
+.rc-day.rc-full { background:#FCEBEB; cursor:default; }
+.rc-day.rc-selected { background:#1D9E75 !important; }
+.rc-day.rc-selected .rc-num { color:#fff !important; }
+.rc-day.rc-selected .rc-dot { background:#fff !important; }
+.rc-num { font-size:13px; font-weight:600; color:#1a1a2e; }
+.rc-day.rc-available .rc-num { color:#0F6E56; }
+.rc-day.rc-saturday .rc-num { color:#185FA5; }
+.rc-day.rc-full .rc-num { color:#A32D2D; }
+.rc-dot { width:4px; height:4px; border-radius:50%; margin-top:2px; }
+.rc-day.rc-available .rc-dot { background:#1D9E75; }
+.rc-day.rc-saturday .rc-dot { background:#378ADD; }
+.rc-day.rc-full .rc-dot { background:#E24B4A; }
+.rc-slot { padding:10px 0; border:1px solid #e0ddd5; border-radius:6px; font-size:13px; cursor:pointer; background:#fff; color:#1a1a2e; transition:all 0.15s; text-align:center; }
+.rc-slot:hover:not(.rc-slot-full) { background:#f0faf5; border-color:#1D9E75; }
+.rc-slot.rc-slot-full { background:#FCEBEB; color:#A32D2D; cursor:default; font-size:11px; }
+.rc-slot.rc-slot-sel { background:#1D9E75; color:#fff; border-color:#1D9E75; }
+.rc-form-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px; }
+.rc-form-box { background:#fff; border-radius:12px; max-width:460px; width:100%; overflow:hidden; max-height:90vh; overflow-y:auto; }
+.rc-form-head { background:#0F6E56; padding:20px 24px; }
+.rc-form-title { font-size:16px; font-weight:600; color:#fff; }
+.rc-form-sub { font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px; }
+.rc-form-body { padding:20px 24px; }
+.rc-label { font-size:12px; color:#888; margin-bottom:4px; display:block; }
+.rc-input { width:100%; padding:9px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; box-sizing:border-box; margin-bottom:12px; }
+.rc-input:focus { outline:none; border-color:#1D9E75; }
+.rc-select { width:100%; padding:9px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; box-sizing:border-box; margin-bottom:12px; background:#fff; }
+.rc-form-foot { padding:0 24px 20px; display:flex; gap:8px; }
+.rc-btn-ok { flex:1; padding:12px; background:#1D9E75; color:#fff; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
+.rc-btn-ok:hover { background:#0F6E56; }
+.rc-btn-cancel { padding:12px 18px; background:none; border:1px solid #ddd; border-radius:6px; font-size:14px; cursor:pointer; color:#888; }
+.rc-success { text-align:center; padding:32px 24px; }
+.rc-res-item { background:#f8f5ef; border-radius:6px; padding:10px 14px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+</style>
+
+<script>
+(function(){
+  const WSLOTS = ['09:00','10:00','11:00','12:00','13:00','14:00'];
+  const SSLOTS = ['종일 장거리 운행 (협의)'];
+  const SERVICES = ['펫택시 단거리 (5만원)','펫택시 중거리 (8만원~)','펫택시 장거리 (15만원~)','어르신 병원 동행 기본 (10만원)','어르신 반일 동행 (15만원)','어르신 원정 동행 (20만원~)'];
+  const MAX = 3;
+  let rcCur = new Date();
+  let rcSelDate = null;
+  let rcSelSlot = null;
+  let rcRes = {};
+
+  function dKey(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+  function isClosed(dow){ return dow===0||dow===4; }
+  function isSat(dow){ return dow===6; }
+  function getBooked(key){ return (rcRes[key]||[]).length; }
+
+  window.rcChangeMonth = function(dir){
+    rcCur.setMonth(rcCur.getMonth()+dir);
+    rcSelDate=null; rcSelSlot=null;
+    document.getElementById('rcSlots').innerHTML='';
+    document.getElementById('rcResList').innerHTML='';
+    rcRender();
+  };
+
+  function rcRender(){
+    const y=rcCur.getFullYear(), m=rcCur.getMonth();
+    document.getElementById('rcTitle').textContent=`${y}년 ${m+1}월`;
+    const grid=document.getElementById('rcGrid');
+    grid.querySelectorAll('.rc-day').forEach(e=>e.remove());
+    const first=new Date(y,m,1).getDay();
+    const last=new Date(y,m+1,0).getDate();
+    const today=new Date();
+    for(let i=0;i<first;i++){
+      const el=document.createElement('div');
+      el.className='rc-day'; grid.appendChild(el);
+    }
+    for(let d=1;d<=last;d++){
+      const el=document.createElement('div');
+      const dow=new Date(y,m,d).getDay();
+      const key=dKey(y,m,d);
+      const isPast=new Date(y,m,d)<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+      const isToday=d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear();
+      const booked=getBooked(key);
+      const slots=isSat(dow)?SSLOTS:WSLOTS;
+      const maxSlots=isSat(dow)?1:MAX*WSLOTS.length;
+      let cls='rc-day';
+      if(isPast) cls+=' rc-past';
+      else if(isClosed(dow)) cls+=' rc-closed';
+      else if(booked>=maxSlots) cls+=' rc-full';
+      else if(isSat(dow)) cls+=' rc-saturday';
+      else cls+=' rc-available';
+      if(isToday) cls+=' rc-today';
+      if(rcSelDate===key) cls+=' rc-selected';
+      el.className=cls;
+      el.innerHTML=`<span class="rc-num">${d}</span><span class="rc-dot"></span>`;
+      if(!isPast&&!isClosed(dow)&&booked<maxSlots){
+        el.onclick=()=>rcSelectDate(key,y,m,d,dow);
+      }
+      grid.appendChild(el);
+    }
+  }
+
+  function rcSelectDate(key,y,m,d,dow){
+    rcSelDate=key; rcSelSlot=null;
+    rcRender();
+    const isSatday=isSat(dow);
+    const dateStr=`${y}년 ${m+1}월 ${d}일${isSatday?' (토요일 장거리)':''}`;
+    const slots=isSatday?SSLOTS:WSLOTS;
+    const booked=rcRes[key]||[];
+    let html=`<div style="background:#f8f5ef;border-radius:8px;padding:16px 18px">
+      <div style="font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:12px">${dateStr} 예약 가능 시간</div>
+      <div style="display:grid;grid-template-columns:repeat(${isSatday?1:3},1fr);gap:8px">`;
+    slots.forEach(slot=>{
+      const isFull=booked.filter(b=>b.slot===slot).length>=(isSatday?1:1);
+      const isSel=rcSelSlot===slot;
+      if(isFull){
+        html+=`<div class="rc-slot rc-slot-full">${slot}<br>마감</div>`;
+      } else {
+        html+=`<div class="rc-slot${isSel?' rc-slot-sel':''}" onclick="rcSelectSlot('${slot}','${key}','${dateStr.replace(/'/g,"\\'")}',${isSatday})">${slot}</div>`;
+      }
+    });
+    html+=`</div></div>`;
+    document.getElementById('rcSlots').innerHTML=html;
+    rcRenderResList(key,dateStr);
+  }
+
+  window.rcSelectSlot = function(slot,key,dateStr,isSat){
+    rcSelSlot=slot;
+    rcOpenForm(slot,key,dateStr,isSat);
+  };
+
+  function rcOpenForm(slot,key,dateStr,isSat){
+    const ol=document.createElement('div');
+    ol.className='rc-form-overlay'; ol.id='rcOverlay';
+    ol.onclick=function(e){ if(e.target===ol) rcCloseForm(); };
+    ol.innerHTML=`<div class="rc-form-box">
+      <div class="rc-form-head">
+        <div class="rc-form-title">예약 신청</div>
+        <div class="rc-form-sub">${dateStr} · ${slot}</div>
+      </div>
+      <div class="rc-form-body">
+        <label class="rc-label">이름</label>
+        <input class="rc-input" id="rc_name" placeholder="홍길동">
+        <label class="rc-label">연락처</label>
+        <input class="rc-input" id="rc_phone" placeholder="010-0000-0000">
+        <label class="rc-label">서비스 선택</label>
+        <select class="rc-select" id="rc_service">
+          <option value="">선택해주세요</option>
+          ${isSat?'<option value="토요일 장거리 종일 운행 (협의)">토요일 장거리 종일 운행 (협의)</option>':SERVICES.map(s=>`<option value="${s}">${s}</option>`).join('')}
+        </select>
+        <label class="rc-label">출발지</label>
+        <input class="rc-input" id="rc_from" placeholder="잠실동 000아파트">
+        ${isSat?`<label class="rc-label">목적지 (지방)</label><input class="rc-input" id="rc_to" placeholder="부산, 대전 등">`:''}
+        <label class="rc-label">메모 (선택)</label>
+        <input class="rc-input" id="rc_memo" placeholder="강아지 2마리, 대형견 등">
+      </div>
+      <div class="rc-form-foot">
+        <button class="rc-btn-cancel" onclick="rcCloseForm()">취소</button>
+        <button class="rc-btn-ok" onclick="rcConfirm('${slot}','${key}','${dateStr.replace(/'/g,"\\'")}')">예약 신청</button>
+      </div>
+    </div>`;
+    document.body.appendChild(ol);
+  }
+
+  window.rcConfirm = function(slot,key,dateStr){
+    const name=document.getElementById('rc_name').value.trim();
+    const phone=document.getElementById('rc_phone').value.trim();
+    const service=document.getElementById('rc_service').value;
+    const from=document.getElementById('rc_from').value.trim();
+    const memo=document.getElementById('rc_memo')?document.getElementById('rc_memo').value.trim():'';
+    if(!name||!phone||!service||!from){ alert('이름, 연락처, 서비스, 출발지는 필수입니다.'); return; }
+    if(!rcRes[key]) rcRes[key]=[];
+    rcRes[key].push({slot,name,phone,service,from,memo});
+    document.getElementById('rcOverlay').querySelector('.rc-form-box').innerHTML=`
+      <div class="rc-success">
+        <div style="font-size:48px;margin-bottom:16px;color:#1D9E75">✓</div>
+        <div style="font-size:18px;font-weight:600;color:#1a1a2e;margin-bottom:8px">예약 신청 완료</div>
+        <div style="font-size:13px;color:#888;line-height:1.8">${dateStr}<br>${slot}<br>${name}님 · ${service}<br><br>확인 후 010-7472-5896으로<br>문자 드리겠습니다.</div>
+        <button class="rc-btn-ok" style="margin-top:20px;width:100%" onclick="rcCloseForm()">확인</button>
+      </div>`;
+    setTimeout(()=>{ rcRender(); const parts=key.split('-'); rcSelectDate(key,parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]),new Date(key).getDay()); },100);
+  };
+
+  window.rcCloseForm = function(){
+    const ol=document.getElementById('rcOverlay');
+    if(ol) ol.remove();
+  };
+
+  function rcRenderResList(key,dateStr){
+    const el=document.getElementById('rcResList');
+    const booked=rcRes[key]||[];
+    if(!booked.length){ el.innerHTML=''; return; }
+    let html=`<div style="font-size:12px;color:#888;margin-bottom:6px">${dateStr} 예약 현황 (${booked.length}건)</div>`;
+    booked.forEach(b=>{
+      html+=`<div class="rc-res-item">
+        <div>
+          <div style="font-size:13px;color:#1a1a2e">${b.name} · ${b.phone}</div>
+          <div style="font-size:11px;color:#888;margin-top:2px">${b.service}</div>
+        </div>
+        <div style="font-size:12px;color:#1D9E75;font-weight:600">${b.slot}</div>
+      </div>`;
+    });
+    el.innerHTML=html;
+  }
+
+  rcRender();
+})();
+</script>
+
+<footer>
+  <div class="footer-logo">올케어</div>
+  <div class="footer-info">
+    잠실 프리미엄 이동 케어 서비스<br>
+    동물운송업 등록 | 서울 송파구 잠실동<br>
+    010-7472-5896
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-tag" id="mTag"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-price-hero" id="mPrice"></div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<script>
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.why-item, .schedule-item').forEach(el => {
+    observer.observe(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.borderBottomColor = 'rgba(201,168,76,0.1)';
+    } else {
+      nav.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+    }
+  });
+
+  // MODAL DATA
+  const modals = {
+
+    pet_short: {
+      tag: '반려동물 이동 · 단거리',
+      title: '10km 이내\n픽업·귀가 서비스',
+      price: '5만원',
+      includes: [
+        '출발지 도착 후 반려동물 탑승 확인',
+        '케이지 고정 및 안전 세팅',
+        '목적지 (동물병원·미용샵·훈련소 등) 안전 이동',
+        '도착 후 인도 및 상태 확인',
+        '이동 중 반려동물 사진 1~2장 보호자 전송',
+        '방수 시트커버·소독 완비 차량'
+      ],
+      excludes: [
+        '병원 대기·접수는 포함되지 않음 (대기 옵션 별도 협의)',
+        '10km 초과 시 중거리 요금 적용'
+      ],
+      details: [
+        { label: '운행 거리', value: '10km 이내' },
+        { label: '소요 시간', value: '약 30~50분' },
+        { label: '보호자 동반', value: '선택 (동반/단독 모두 가능)' },
+        { label: '예약 마감', value: '전날까지' }
+      ]
+    },
+
+    pet_solo: {
+      tag: '반려동물 이동 · 단독',
+      title: '보호자 없이\n반려동물 혼자 이동',
+      price: '4만원~',
+      includes: [
+        '출발지에서 반려동물 인수 (보호자 확인 후 출발)',
+        '목적지 담당자에게 직접 인도',
+        '이동 중 반려동물 상태 사진 실시간 전송',
+        '도착 확인 문자 발송',
+        '케이지·안전펜스 완비'
+      ],
+      excludes: [
+        '반려동물이 극도로 예민하거나 공격성 있는 경우 사전 협의 필요',
+        '목적지에 인수자가 반드시 있어야 함'
+      ],
+      details: [
+        { label: '대상', value: '강아지·고양이 모두 가능' },
+        { label: '인수 방식', value: '출발지 보호자 → 기사 → 목적지 담당자' },
+        { label: '실시간 공유', value: '이동 중 사진 전송' },
+        { label: '예약 마감', value: '전날까지' }
+      ]
+    },
+
+    pet_mid: {
+      tag: '반려동물 이동 · 중거리',
+      title: '10~30km\n중거리 이동 서비스',
+      price: '8만원~',
+      includes: [
+        '출발지 픽업 후 목적지 직행',
+        '강남·서초·강동·성남·분당·하남 전 지역 커버',
+        '대형견 (40kg 이상) 탑승 가능 — 카카오T 불가 구간',
+        '이동 중 사진 실시간 전송',
+        '왕복 예약 시 10% 할인'
+      ],
+      excludes: [
+        '30km 초과 시 장거리 요금 적용'
+      ],
+      details: [
+        { label: '운행 거리', value: '10~30km' },
+        { label: '소요 시간', value: '약 40분~1시간 30분' },
+        { label: '대형견', value: '40kg 이상도 가능' },
+        { label: '왕복 할인', value: '10%' }
+      ]
+    },
+
+    pet_long: {
+      tag: '반려동물 이동 · 장거리',
+      title: '30km+ 전국\n장거리 이동 서비스',
+      price: '15만원~',
+      includes: [
+        '서울 출발 전국 어디든 운행 가능',
+        '반려동물 동반 여행 픽업',
+        '지방 동물병원 원정 진료 이동',
+        '귀성·이사 시 반려동물 별도 이송',
+        '반려동물 단독 탁송 가능 (전국)',
+        '이동 중 실시간 위치·사진 공유'
+      ],
+      excludes: [
+        '왕복 당일 운행은 30만원~',
+        '고속도로 통행료는 실비 청구'
+      ],
+      details: [
+        { label: '운행 범위', value: '전국 (제주 제외)' },
+        { label: '기준 단가', value: '거리·시간에 따라 협의' },
+        { label: '탁송', value: '반려동물 단독 전국 가능' },
+        { label: '예약', value: '최소 2일 전' }
+      ]
+    },
+
+    silver_basic: {
+      tag: '어르신 병원 동행 · 기본',
+      title: '픽업부터 귀가까지\n기본 동행 (3시간)',
+      price: '10만원',
+      includes: [
+        '자택 자차 픽업',
+        '병원 접수·수납·키오스크 대신 처리',
+        '진료실 앞 대기 및 필요시 동행 입실',
+        '처방전·약 수령',
+        '자택 귀가 후 안전 확인',
+        '진료 내용 정리 후 보호자(자녀)께 문자 전달',
+        '교통비·주차비 추가 없음 — 이게 최종 금액'
+      ],
+      excludes: [
+        '3시간 초과 시 30분당 1만원 추가',
+        '의료적 처치나 투약 행위는 불가'
+      ],
+      details: [
+        { label: '포함 범위', value: '픽업→접수→대기→귀가 일체' },
+        { label: '추가 비용', value: '없음 (교통비 포함)' },
+        { label: '진료 전달', value: '보호자께 문자 전달 포함' },
+        { label: '예약 마감', value: '전날까지' }
+      ]
+    },
+
+    silver_half: {
+      tag: '어르신 병원 동행 · 반일',
+      title: '복수 검사·긴 대기\n반일 동행 (3~5시간)',
+      price: '15만원',
+      includes: [
+        '자택 자차 픽업',
+        'CT·MRI·내시경·혈액검사 등 복수 검사 동행',
+        '검사실 이동 안내 및 대기 동행',
+        '점심·간식 등 식사 보조 (필요시)',
+        '처방전·약 수령 후 귀가',
+        '전체 진료·검사 내용 정리 후 보호자 전달',
+        '교통비 포함 — 최종 금액'
+      ],
+      excludes: [
+        '5시간 초과 시 30분당 1만원 추가'
+      ],
+      details: [
+        { label: '대상', value: '복수 검사·장시간 대기 필요한 경우' },
+        { label: '소요 시간', value: '3~5시간' },
+        { label: '식사 보조', value: '필요시 포함' },
+        { label: '보고', value: '검사 결과 전 항목 정리 전달' }
+      ]
+    },
+
+    silver_major: {
+      tag: '어르신 병원 동행 · 원정',
+      title: '대형병원 원정\n동행 서비스',
+      price: '20만원~',
+      includes: [
+        '서울아산·삼성서울·세브란스·서울대 등 대형병원',
+        '복잡한 대형병원 내 동선 안내',
+        '여러 과 진료 연속 동행',
+        '검사 결과 설명 보조',
+        '필요시 휠체어 지원',
+        '귀가 후 보호자 상세 보고',
+        '장거리 포함 교통비 없음 — 최종 금액'
+      ],
+      excludes: [
+        '거리·시간에 따라 요금 협의 가능',
+        '의료 통역·전문 의료 상담은 불가'
+      ],
+      details: [
+        { label: '대상 병원', value: '5대 대형병원 포함 전국' },
+        { label: '소요 시간', value: '5~8시간 (경우에 따라 상이)' },
+        { label: '동선 지원', value: '복잡한 내부 안내 포함' },
+        { label: '예약', value: '최소 2일 전' }
+      ]
+    },
+
+    silver_monthly: {
+      tag: '어르신 병원 동행 · 월정액',
+      title: '정기 동행\n월정액 패키지 (월 4회)',
+      price: '40만원~',
+      includes: [
+        '재활치료·투석·항암 등 주 1회 정기 병원 방문',
+        '매회 픽업→동행→귀가 전 과정 포함',
+        '담당 기사 고정 배정 (신뢰 형성)',
+        '진료 내용 월간 기록 정리 제공',
+        '긴급 추가 동행 시 우선 배정',
+        '교통비 포함 — 최종 금액'
+      ],
+      excludes: [
+        '월 4회 초과 시 건당 8만원 추가',
+        '1개월 단위 선결제'
+      ],
+      details: [
+        { label: '횟수', value: '월 4회 (주 1회)' },
+        { label: '담당 기사', value: '고정 배정' },
+        { label: '건당 환산', value: '10만원 → 8만원 절약' },
+        { label: '결제', value: '월 선결제' }
+      ]
+    }
+
+  };
+
+  function openModal(key) {
+    const d = modals[key];
+    if (!d) return;
+
+    document.getElementById('mTag').textContent = d.tag;
+    document.getElementById('mTitle').textContent = d.title;
+    document.getElementById('mPrice').textContent = d.price;
+
+    let html = '';
+
+    // Includes
+    html += `<div class="modal-section">
+      <div class="modal-section-title">포함 내용</div>
+      <ul class="modal-checklist">
+        ${d.includes.map(i => `<li>${i}</li>`).join('')}
+      </ul>
+    </div>`;
+
+    // Excludes
+    if (d.excludes && d.excludes.length) {
+      html += `<div class="modal-section">
+        <div class="modal-section-title">유의 사항</div>
+        <ul class="modal-checklist">
+          ${d.excludes.map(i => `<li class="warn">${i}</li>`).join('')}
+        </ul>
+      </div>`;
+    }
+
+    // Details grid
+    if (d.details && d.details.length) {
+      html += `<div class="modal-section">
+        <div class="modal-section-title">상세 정보</div>
+        <div class="modal-detail-grid">
+          ${d.details.map(item => `
+            <div class="modal-detail-item">
+              <div class="modal-detail-label">${item.label}</div>
+              <div class="modal-detail-value">${item.value}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+
+    // CTA
+    html += `
+      <a href="tel:010-7472-5896" class="modal-cta">📞 010-7472-5896 전화 예약</a>
+      <div class="modal-note">카카오톡 @올케어 로도 문의 가능합니다<br>예약은 이용일 전날까지</div>
+    `;
+
+    document.getElementById('mBody').innerHTML = html;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) {
+      closeModalDirect();
+    }
+  }
+
+  function closeModalDirect() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModalDirect();
+  });
+</script>
+
+</body>
+</html>
