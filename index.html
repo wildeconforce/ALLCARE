@@ -3,1276 +3,1089 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>올케어 | 잠실 프리미엄 이동 케어 서비스</title>
+<title>올케어 | 픽업부터 귀가까지 올케어</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1a2e;
-    --cream: #f8f5ef;
-    --gold: #c9a84c;
-    --gold-light: #e8d49a;
-    --sage: #6b8f71;
-    --rust: #c0622a;
-    --warm-gray: #8a8070;
-    --card-bg: #ffffff;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: #e8e4d9;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 40px 60px;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(107,143,113,0.2) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(107,143,113,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-badge {
-    display: inline-block;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--sage);
-    border: 1px solid rgba(107,143,113,0.4);
-    padding: 8px 16px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    animation: fadeUp 0.8s ease forwards;
-    opacity: 0;
-  }
-
-  .hero-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(42px, 8vw, 80px);
-    font-weight: 900;
-    color: var(--ink);
-    line-height: 1.1;
-    margin-bottom: 24px;
-    animation: fadeUp 0.8s ease 0.1s forwards;
-    opacity: 0;
-  }
-
-  .hero-title span {
-    color: var(--sage);
-    display: block;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    font-weight: 300;
-    color: rgba(26,26,46,0.6);
-    line-height: 1.8;
-    max-width: 480px;
-    margin-bottom: 48px;
-    animation: fadeUp 0.8s ease 0.2s forwards;
-    opacity: 0;
-  }
-
-  .hero-cta-group {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    animation: fadeUp 0.8s ease 0.3s forwards;
-    opacity: 0;
-  }
-
-  .btn-primary {
-    background: var(--sage);
-    color: #fff;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 16px 32px;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  }
-
-  .btn-primary:hover {
-    background: #5a7a60;
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: rgba(26,26,46,0.7);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 16px 32px;
-    border: 1px solid rgba(26,26,46,0.2);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--sage);
-    color: var(--sage);
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: rgba(26,26,46,0.3);
-    font-size: 11px;
-    letter-spacing: 2px;
-    animation: fadeUp 0.8s ease 0.5s forwards;
-    opacity: 0;
-  }
-
-  .hero-scroll::before {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background: rgba(26,26,46,0.2);
-  }
-
-  .hero-stats {
-    position: absolute;
-    right: 40px;
-    bottom: 40px;
-    display: flex;
-    gap: 40px;
-    animation: fadeUp 0.8s ease 0.4s forwards;
-    opacity: 0;
-  }
-
-  .stat {
-    text-align: right;
-  }
-
-  .stat-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--sage);
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: rgba(26,26,46,0.4);
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-
-  /* SERVICES */
-  .services {
-    padding: 100px 40px;
-    background: var(--cream);
-  }
-
-  .section-header {
-    margin-bottom: 60px;
-  }
-
-  .section-tag {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-tag::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .section-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: 900;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2px;
-    background: var(--ink);
-  }
-
-  .service-card {
-    background: var(--card-bg);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    cursor: pointer;
-  }
-
-  .service-card:hover {
-    background: var(--ink);
-  }
-
-  .service-card:hover .service-title,
-  .service-card:hover .service-desc,
-  .service-card:hover .service-price-label {
-    color: rgba(255,255,255,0.9);
-  }
-
-  .service-card:hover .service-icon {
-    background: rgba(201,168,76,0.15);
-    border-color: var(--gold);
-  }
-
-  .service-card:hover .service-price {
-    color: var(--gold);
-  }
-
-  .service-card:hover .service-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .service-icon {
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 32px;
-    transition: all 0.4s ease;
-  }
-
-  .service-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    transition: color 0.4s ease;
-  }
-
-  .service-desc {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--warm-gray);
-    margin-bottom: 32px;
-    transition: color 0.4s ease;
-  }
-
-  .service-price {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--ink);
-    transition: color 0.4s ease;
-  }
-
-  .service-price-label {
-    font-size: 12px;
-    color: var(--warm-gray);
-    margin-top: 6px;
-    transition: color 0.4s ease;
-  }
-
-  .service-arrow {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    font-size: 20px;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.4s ease;
-    color: var(--gold);
-  }
-
-  .service-icon {
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 32px;
-    transition: all 0.4s ease;
-  }
-
-  .service-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    transition: color 0.4s ease;
-  }
-
-  .service-desc {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--warm-gray);
-    margin-bottom: 32px;
-    transition: color 0.4s ease;
-  }
-
-  .service-price {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--ink);
-    transition: color 0.4s ease;
-  }
-
-  .service-price-label {
-    font-size: 12px;
-    color: var(--warm-gray);
-    margin-top: 4px;
-    transition: color 0.4s ease;
-  }
-
-  .service-arrow {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    font-size: 20px;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.4s ease;
-    color: var(--gold);
-  }
-
-  /* WHY */
-  .why {
-    padding: 100px 40px;
-    background: var(--ink);
-    color: #fff;
-  }
-
-  .why .section-title {
-    color: #fff;
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 48px;
-    margin-top: 60px;
-  }
-
-  .why-item {
-    padding: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 32px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-  }
-
-  .why-item.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .why-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 48px;
-    font-weight: 900;
-    color: rgba(201,168,76,0.3);
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  .why-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .why-desc {
-    font-size: 13px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.5);
-  }
-
-  /* SCHEDULE */
-  .schedule {
-    padding: 100px 40px;
-    background: var(--cream);
-  }
-
-  .schedule-list {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .schedule-item {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    align-items: center;
-    gap: 32px;
-    padding: 28px 32px;
-    background: #fff;
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  .schedule-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .schedule-item:hover {
-    background: var(--ink);
-    color: #fff;
-  }
-
-  .schedule-item:hover .schedule-time,
-  .schedule-item:hover .schedule-label {
-    color: rgba(255,255,255,0.5);
-  }
-
-  .schedule-item:hover .schedule-name {
-    color: #fff;
-  }
-
-  .schedule-item:hover .schedule-price {
-    color: var(--gold);
-  }
-
-  .schedule-time {
-    font-size: 12px;
-    color: var(--warm-gray);
-    font-weight: 500;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
-  }
-
-  .schedule-info {}
-
-  .schedule-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    transition: color 0.3s ease;
-  }
-
-  .schedule-label {
-    font-size: 12px;
-    color: var(--warm-gray);
-    transition: color 0.3s ease;
-  }
-
-  .schedule-price {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--ink);
-    text-align: right;
-    transition: color 0.3s ease;
-  }
-
-  /* AREA */
-  .area {
-    padding: 100px 40px;
-    background: var(--sage);
-    color: #fff;
-    text-align: center;
-  }
-
-  .area .section-tag {
-    justify-content: center;
-    color: rgba(255,255,255,0.7);
-  }
-
-  .area .section-tag::before {
-    background: rgba(255,255,255,0.5);
-  }
-
-  .area .section-title {
-    color: #fff;
-  }
-
-  .area-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 48px;
-  }
-
-  .area-tag {
-    padding: 10px 24px;
-    border: 1px solid rgba(255,255,255,0.3);
-    font-size: 14px;
-    color: rgba(255,255,255,0.9);
-    transition: all 0.3s ease;
-    cursor: default;
-  }
-
-  .area-tag:hover {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.6);
-  }
-
-  .area-tag.featured {
-    background: rgba(255,255,255,0.2);
-    border-color: rgba(255,255,255,0.6);
-    font-weight: 700;
-  }
-
-  /* CONTACT */
-  .contact {
-    padding: 100px 40px;
-    background: var(--ink);
-    color: #fff;
-  }
-
-  .contact-inner {
-    max-width: 600px;
-  }
-
-  .contact .section-title {
-    color: #fff;
-    margin-bottom: 48px;
-  }
-
-  .contact-methods {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-bottom: 48px;
-  }
-
-  .contact-method {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 24px 32px;
-    background: rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .contact-method:hover {
-    background: rgba(201,168,76,0.1);
-  }
-
-  .contact-method-icon {
-    font-size: 20px;
-    width: 48px;
-    text-align: center;
-  }
-
-  .contact-method-info {}
-
-  .contact-method-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
-
-  .contact-method-value {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  .contact-note {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.8;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 32px;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 32px 40px;
-    background: #0d0d1a;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .footer-logo {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--gold);
-  }
-
-  .footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    line-height: 1.8;
-    text-align: right;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(232,228,217,0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(107,143,113,0.12);
-  }
-
-  .nav-logo {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--sage);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 13px;
-    color: rgba(26,26,46,0.55);
-    text-decoration: none;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover {
-    color: var(--sage);
-  }
-
-  .nav-cta {
-    background: var(--sage) !important;
-    color: #fff !important;
-    font-weight: 700 !important;
-    padding: 8px 20px;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* PRICE TABLE */
-  .price-table {
-    margin-top: 24px;
-    border-top: 1px solid rgba(0,0,0,0.08);
-  }
-
-  .service-card:hover .price-table {
-    border-top-color: rgba(255,255,255,0.1);
-  }
-
-  .price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    font-size: 13px;
-    transition: all 0.4s ease;
-  }
-
-  .service-card:hover .price-row {
-    border-bottom-color: rgba(255,255,255,0.08);
-  }
-
-  .price-row.highlight {
-    border-bottom: none;
-  }
-
-  .price-type {
-    color: var(--warm-gray);
-    transition: color 0.4s ease;
-  }
-
-  .service-card:hover .price-type {
-    color: rgba(255,255,255,0.5);
-  }
-
-  .price-val {
-    font-family: 'Noto Serif KR', serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--ink);
-    transition: color 0.4s ease;
-  }
-
-  .price-row.highlight .price-val {
-    color: var(--gold);
-  }
-
-  .service-card:hover .price-val {
-    color: rgba(255,255,255,0.9);
-  }
-
-  .service-card:hover .price-row.highlight .price-val {
-    color: var(--gold);
-  }
-
-  /* PRICE CATEGORY */
-  .price-category-label {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--gold);
-    display: inline-block;
-  }
-
-  /* NOTICE BOX */
-  .notice-box {
-    background: rgba(201,168,76,0.08);
-    border-left: 3px solid var(--gold);
-    padding: 16px 20px;
-    font-size: 13px;
-    line-height: 1.8;
-    color: var(--warm-gray);
-    margin-bottom: 16px;
-  }
-
-  .notice-box strong {
-    color: var(--ink);
-  }
-
-  /* MODAL */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(10,10,20,0.85);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .modal {
-    background: var(--cream);
-    max-width: 560px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-  }
-
-  .modal-overlay.active .modal {
-    transform: translateY(0);
-  }
-
-  .modal-header {
-    background: var(--ink);
-    padding: 32px 36px 28px;
-    position: relative;
-  }
-
-  .modal-tag {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .modal-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.3;
-  }
-
-  .modal-price-hero {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--gold);
-    margin-top: 12px;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
-
-  .modal-close:hover {
-    background: rgba(255,255,255,0.2);
-  }
-
-  .modal-body {
-    padding: 32px 36px;
-  }
-
-  .modal-section {
-    margin-bottom: 28px;
-  }
-
-  .modal-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .modal-section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(0,0,0,0.08);
-  }
-
-  .modal-checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .modal-checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink);
-  }
-
-  .modal-checklist li::before {
-    content: '✓';
-    color: var(--sage);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .modal-checklist li.warn::before {
-    content: '!';
-    color: var(--rust);
-  }
-
-  .modal-detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .modal-detail-item {
-    background: #fff;
-    padding: 14px 16px;
-    border-left: 2px solid var(--gold);
-  }
-
-  .modal-detail-label {
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: var(--warm-gray);
-    margin-bottom: 4px;
-  }
-
-  .modal-detail-value {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--ink);
-  }
-
-  .modal-cta {
-    background: var(--gold);
-    color: var(--ink);
-    width: 100%;
-    padding: 18px;
-    border: none;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    margin-top: 8px;
-    transition: background 0.2s;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-  }
-
-  .modal-cta:hover {
-    background: var(--gold-light);
-  }
-
-  .modal-note {
-    font-size: 12px;
-    color: var(--warm-gray);
-    text-align: center;
-    margin-top: 12px;
-    line-height: 1.6;
-  }
-
-  .clickable-row {
-    cursor: pointer;
-  }
-
-  .clickable-row:hover .schedule-name {
-    color: var(--gold);
-  }
-
-  .row-arrow {
-    color: var(--warm-gray);
-    font-size: 14px;
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .clickable-row:hover .row-arrow {
-    transform: translateX(4px);
-    color: var(--gold);
-  }
-
-  .service-card-clickable {
-    cursor: pointer;
-  }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 24px 80px; }
-    .hero-stats { display: none; }
-    .services { padding: 60px 24px; }
-    .why { padding: 60px 24px; }
-    .schedule { padding: 60px 24px; }
-    .area { padding: 60px 24px; }
-    .contact { padding: 60px 24px; }
-    .schedule-item { grid-template-columns: 1fr auto; }
-    .schedule-time { display: none; }
-    footer { padding: 24px; }
-    .footer-info { text-align: left; }
-  }
+:root {
+  --warm-cream: #fdf6ee;
+  --soft-brown: #8b6b4a;
+  --deep-brown: #3d2b1f;
+  --amber: #d4813a;
+  --amber-light: #f2c98a;
+  --sage: #7a9e7e;
+  --sage-light: #b8d4ba;
+  --blush: #e8c4b0;
+  --warm-white: #fffbf5;
+  --text-main: #2c1f14;
+  --text-sub: #7a6a5a;
+  --gold: #c9933a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--warm-cream);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 18px 48px;
+  display: flex; justify-content:space-between; align-items:center;
+  background: rgba(253,246,238,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139,107,74,0.15);
+}
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px; font-weight:900;
+  color: var(--amber);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--sage); }
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a {
+  font-size:13px; color:var(--text-sub);
+  text-decoration:none; letter-spacing:0.5px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--amber); }
+.nav-cta {
+  background: var(--amber) !important;
+  color: white !important;
+  padding: 9px 22px;
+  border-radius: 50px;
+  font-weight:600 !important;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items:center;
+  overflow: hidden;
+  padding: 100px 48px 60px;
+}
+
+.hero-bg {
+  position: absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212,129,58,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 20% 70%, rgba(122,158,126,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 100% at 50% 0%, rgba(248,220,180,0.3) 0%, transparent 50%),
+    linear-gradient(160deg, #fdf6ee 0%, #f7ede0 50%, #eff5f0 100%);
+}
+
+.hero-bg::before {
+  content:'';
+  position:absolute; top:10%; right:5%;
+  width:420px; height:420px;
+  border-radius:60% 40% 70% 30% / 50% 60% 40% 50%;
+  background: linear-gradient(135deg, rgba(212,129,58,0.08), rgba(232,196,176,0.15));
+  animation: morphFloat 8s ease-in-out infinite;
+}
+.hero-bg::after {
+  content:'';
+  position:absolute; bottom:10%; left:5%;
+  width:300px; height:300px;
+  border-radius:40% 60% 30% 70% / 60% 40% 60% 40%;
+  background: linear-gradient(135deg, rgba(122,158,126,0.1), rgba(184,212,186,0.15));
+  animation: morphFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes morphFloat {
+  0%,100% { border-radius: 60% 40% 70% 30%/50% 60% 40% 50%; transform:translate(0,0) rotate(0deg); }
+  33% { border-radius: 40% 60% 30% 70%/60% 30% 70% 40%; transform:translate(15px,-10px) rotate(3deg); }
+  66% { border-radius: 70% 30% 50% 50%/30% 70% 30% 70%; transform:translate(-10px,10px) rotate(-2deg); }
+}
+
+.hero-content {
+  position:relative; z-index:2;
+  max-width: 560px;
+}
+
+.hero-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(212,129,58,0.1);
+  border: 1px solid rgba(212,129,58,0.25);
+  padding: 7px 16px;
+  border-radius: 50px;
+  font-size:12px; font-weight:600;
+  color: var(--amber);
+  letter-spacing:1px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.7s ease forwards; opacity:0;
+}
+.hero-tag::before { content:'✦'; font-size:9px; }
+
+.hero-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight:900; line-height:1.15;
+  color: var(--deep-brown);
+  margin-bottom:20px;
+  animation: fadeUp 0.7s ease 0.1s forwards; opacity:0;
+}
+.hero-title .accent { color: var(--amber); }
+.hero-title .accent2 { color: var(--sage); }
+
+.hero-sub {
+  font-size:16px; line-height:1.9;
+  color: var(--text-sub);
+  margin-bottom: 40px;
+  animation: fadeUp 0.7s ease 0.2s forwards; opacity:0;
+}
+
+.hero-btns {
+  display:flex; gap:14px; flex-wrap:wrap;
+  animation: fadeUp 0.7s ease 0.3s forwards; opacity:0;
+}
+
+.btn-warm {
+  background: linear-gradient(135deg, var(--amber), #e8973f);
+  color:white; font-size:14px; font-weight:700;
+  padding:15px 30px; border:none; border-radius:50px;
+  cursor:pointer; text-decoration:none;
+  box-shadow: 0 8px 24px rgba(212,129,58,0.35);
+  transition: all 0.3s ease;
+  display:inline-block;
+}
+.btn-warm:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(212,129,58,0.45); }
+
+.btn-outline {
+  background:transparent; color:var(--amber);
+  font-size:14px; font-weight:600;
+  padding:15px 30px; border:2px solid rgba(212,129,58,0.4);
+  border-radius:50px; cursor:pointer; text-decoration:none;
+  transition:all 0.3s ease; display:inline-block;
+}
+.btn-outline:hover { border-color:var(--amber); background:rgba(212,129,58,0.06); }
+
+.hero-visual {
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  width: min(520px, 45vw);
+  z-index:2;
+  animation: fadeUp 0.9s ease 0.2s forwards; opacity:0;
+}
+
+.hero-badges {
+  display:flex; gap:12px; flex-wrap:wrap;
+  margin-top: 40px;
+  animation: fadeUp 0.7s ease 0.4s forwards; opacity:0;
+}
+.hero-badge-item {
+  display:flex; align-items:center; gap:8px;
+  background:white;
+  border-radius:12px; padding:10px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  font-size:12px; font-weight:600; color:var(--text-main);
+}
+.hero-badge-item .badge-icon { font-size:18px; }
+
+.pet-scene { width:100%; height:100%; }
+
+/* SECTION COMMON */
+section { padding: 90px 48px; }
+.section-label {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:700; letter-spacing:2.5px;
+  color:var(--amber); text-transform:uppercase;
+  margin-bottom:16px;
+}
+.section-label::before { content:''; width:20px; height:2px; background:var(--amber); display:block; }
+
+.section-title {
+  font-family:'Noto Serif KR', serif;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight:900; line-height:1.2;
+  color:var(--deep-brown);
+}
+
+/* SERVICES */
+.services { background: var(--warm-cream); }
+.services-wrapper { display:grid; gap:40px; margin-top:60px; }
+
+.service-feature {
+  background:white;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow: 0 8px 40px rgba(61,43,31,0.08);
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height: 420px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.service-feature:hover {
+  transform:translateY(-4px);
+  box-shadow: 0 20px 60px rgba(61,43,31,0.13);
+}
+.service-feature.reverse { direction:rtl; }
+.service-feature.reverse > * { direction:ltr; }
+
+.sf-visual {
+  position:relative; overflow:hidden;
+  background: linear-gradient(135deg, #fff8f0, #fde8d0);
+}
+.sf-visual.sage-bg {
+  background: linear-gradient(135deg, #f0f7f0, #d8eedd);
+}
+
+.sf-content {
+  padding: 48px 44px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+
+.sf-tag {
+  display:inline-block;
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  color:var(--amber); background:rgba(212,129,58,0.1);
+  padding:5px 12px; border-radius:50px;
+  margin-bottom:20px;
+}
+.sf-tag.green { color:var(--sage); background:rgba(122,158,126,0.12); }
+
+.sf-title {
+  font-family:'Noto Serif KR', serif;
+  font-size:26px; font-weight:900;
+  color:var(--deep-brown); margin-bottom:14px;
+  line-height:1.3;
+}
+
+.sf-desc {
+  font-size:14px; line-height:1.9;
+  color:var(--text-sub); margin-bottom:24px;
+}
+
+.sf-highlight {
+  background:linear-gradient(135deg, rgba(212,129,58,0.08), rgba(248,220,180,0.2));
+  border-left:3px solid var(--amber);
+  padding:12px 16px; border-radius:0 10px 10px 0;
+  font-size:13px; font-weight:600; color:var(--deep-brown);
+  margin-bottom:28px;
+}
+.sf-highlight.green-hl {
+  background:linear-gradient(135deg, rgba(122,158,126,0.08), rgba(184,212,186,0.2));
+  border-left-color:var(--sage);
+}
+
+.price-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.price-chip {
+  background:white;
+  border:1.5px solid rgba(212,129,58,0.15);
+  border-radius:14px; padding:12px 14px;
+  transition:all 0.3s ease;
+  cursor:default;
+}
+.price-chip:hover {
+  border-color:var(--amber);
+  box-shadow:0 4px 16px rgba(212,129,58,0.15);
+  transform:scale(1.02);
+}
+.price-chip.green-chip { border-color:rgba(122,158,126,0.2); }
+.price-chip.green-chip:hover { border-color:var(--sage); box-shadow:0 4px 16px rgba(122,158,126,0.15); }
+.price-chip.featured {
+  background:linear-gradient(135deg, var(--amber), #e8973f);
+  border-color:transparent; grid-column:span 2;
+}
+.price-chip.featured .pc-type,
+.price-chip.featured .pc-val,
+.price-chip.featured .pc-note { color:white; }
+.price-chip.featured-green {
+  background:linear-gradient(135deg, var(--sage), #8db592);
+  border-color:transparent; grid-column:span 2;
+}
+.price-chip.featured-green .pc-type,
+.price-chip.featured-green .pc-val,
+.price-chip.featured-green .pc-note { color:white; }
+
+.pc-type { font-size:11px; font-weight:600; color:var(--text-sub); letter-spacing:0.5px; margin-bottom:4px; }
+.pc-val { font-family:'Noto Serif KR', serif; font-size:20px; font-weight:900; color:var(--deep-brown); line-height:1.1; }
+.pc-note { font-size:10px; color:var(--text-sub); margin-top:3px; }
+
+.pet-illustration { width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:40px; }
+.elderly-scene-wrapper { width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:30px; position:relative; }
+
+/* PRICING SECTION */
+.pricing-section {
+  background: linear-gradient(160deg, #2c1f14 0%, #3d2b1f 50%, #2a3528 100%);
+  color:white; position:relative; overflow:hidden;
+}
+.pricing-section::before {
+  content:''; position:absolute; top:-100px; right:-100px;
+  width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle, rgba(212,129,58,0.15), transparent 70%);
+}
+.pricing-section::after {
+  content:''; position:absolute; bottom:-80px; left:-80px;
+  width:300px; height:300px; border-radius:50%;
+  background:radial-gradient(circle, rgba(122,158,126,0.12), transparent 70%);
+}
+.pricing-section .section-label { color:var(--amber-light); }
+.pricing-section .section-label::before { background:var(--amber-light); }
+.pricing-section .section-title { color:white; }
+
+.pricing-tabs { display:flex; gap:8px; margin-top:48px; margin-bottom:32px; position:relative; z-index:2; }
+.ptab {
+  padding:10px 24px; border-radius:50px;
+  font-size:13px; font-weight:600;
+  cursor:pointer; border:1.5px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.6); background:transparent;
+  transition:all 0.3s ease;
+}
+.ptab.active { background:var(--amber); border-color:var(--amber); color:white; }
+.ptab.active.green { background:var(--sage); border-color:var(--sage); }
+
+.pricing-content { position:relative; z-index:2; }
+.pricing-panel { display:none; }
+.pricing-panel.active { display:block; }
+.pricing-infographic { display:grid; gap:12px; }
+
+.pi-row {
+  display:grid; grid-template-columns:180px 1fr auto;
+  align-items:center; gap:20px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px; padding:20px 24px;
+  transition:all 0.3s ease; cursor:default;
+}
+.pi-row:hover { background:rgba(255,255,255,0.1); border-color:rgba(212,129,58,0.3); transform:translateX(4px); }
+.pi-row.top-pick { background:linear-gradient(135deg, rgba(212,129,58,0.2), rgba(212,129,58,0.08)); border-color:rgba(212,129,58,0.4); }
+.pi-row.top-pick.sage-pick { background:linear-gradient(135deg, rgba(122,158,126,0.2), rgba(122,158,126,0.08)); border-color:rgba(122,158,126,0.4); }
+
+.pi-badge { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1px; padding:3px 10px; border-radius:50px; background:rgba(212,129,58,0.2); color:var(--amber-light); margin-bottom:6px; }
+.pi-badge.green { background:rgba(122,158,126,0.2); color:var(--sage-light); }
+.pi-badge.hot { background:rgba(212,129,58,0.4); color:#ffd89e; }
+.pi-name { font-family:'Noto Serif KR', serif; font-size:16px; font-weight:700; color:white; }
+
+.pi-bar-area { flex:1; }
+.pi-desc { font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:8px; }
+.pi-bar { height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden; }
+.pi-bar-fill { height:100%; border-radius:3px; background:linear-gradient(90deg, var(--amber), #f2c98a); transition:width 1s ease; }
+.pi-bar-fill.green { background:linear-gradient(90deg, var(--sage), var(--sage-light)); }
+
+.pi-price-area { text-align:right; }
+.pi-price { font-family:'Noto Serif KR', serif; font-size:24px; font-weight:900; color:white; line-height:1; }
+.pi-price-sub { font-size:11px; color:rgba(255,255,255,0.45); margin-top:4px; }
+
+.pi-includes { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.pi-tag { font-size:10px; font-weight:600; padding:3px 9px; border-radius:50px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6); }
+
+.included-note {
+  display:flex; align-items:flex-start; gap:12px;
+  background:rgba(122,158,126,0.15); border:1px solid rgba(122,158,126,0.25);
+  border-radius:14px; padding:16px 20px; margin-top:16px;
+  font-size:13px; color:rgba(255,255,255,0.75); line-height:1.7;
+}
+.included-note .note-icon { font-size:20px; flex-shrink:0; }
+
+/* WHY */
+.why-section { background: var(--warm-white); position:relative; overflow:hidden; }
+.why-section::before {
+  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(139,107,74,0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+.why-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:24px; margin-top:56px; position:relative; z-index:1; }
+.why-card {
+  background:white; border-radius:24px; padding:36px 32px;
+  box-shadow:0 4px 24px rgba(61,43,31,0.07);
+  transition:all 0.4s ease; opacity:0; transform:translateY(20px);
+}
+.why-card.visible { opacity:1; transform:translateY(0); }
+.why-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(61,43,31,0.12); }
+
+.why-icon { width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:24px; background:linear-gradient(135deg, rgba(212,129,58,0.12), rgba(248,220,180,0.2)); }
+.why-icon.green-icon { background:linear-gradient(135deg, rgba(122,158,126,0.12), rgba(184,212,186,0.2)); }
+.why-num { font-family:'Noto Serif KR', serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--amber); margin-bottom:10px; }
+.why-title { font-family:'Noto Serif KR', serif; font-size:18px; font-weight:700; color:var(--deep-brown); margin-bottom:10px; }
+.why-desc { font-size:13px; line-height:1.8; color:var(--text-sub); }
+
+/* AREA */
+.area-section { background:linear-gradient(135deg, #f7ede0, #e8f4ea); text-align:center; padding:80px 48px; }
+.area-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:40px; }
+.area-tag { padding:10px 22px; border-radius:50px; font-size:13px; font-weight:600; border:1.5px solid rgba(139,107,74,0.2); color:var(--soft-brown); background:white; transition:all 0.3s ease; cursor:default; }
+.area-tag:hover { background:var(--amber); color:white; border-color:var(--amber); }
+.area-tag.featured { background:var(--amber); color:white; border-color:var(--amber); }
+
+/* MARKETING BAR */
+.marketing-bar {
+  background:linear-gradient(135deg, var(--amber), #c07830);
+  padding:20px 48px;
+  display:flex; align-items:center; gap:16px;
+  color:white; font-size:14px;
+}
+.marketing-bar strong { font-weight:700; }
+.marketing-bar .mb-icon { font-size:22px; flex-shrink:0; }
+
+/* CONTACT */
+.contact-section { background:linear-gradient(160deg, #3d2b1f, #2a3528); padding:90px 48px; }
+.contact-inner { max-width:580px; }
+.contact-section .section-label { color:var(--amber-light); }
+.contact-section .section-label::before { background:var(--amber-light); }
+.contact-section .section-title { color:white; margin-bottom:48px; }
+
+.contact-cards { display:flex; flex-direction:column; gap:12px; }
+.contact-card {
+  display:flex; align-items:center; gap:20px;
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px; padding:20px 24px;
+  text-decoration:none; color:inherit; transition:all 0.3s ease;
+}
+.contact-card:hover { background:rgba(212,129,58,0.12); border-color:rgba(212,129,58,0.3); transform:translateX(4px); }
+.cc-icon { width:48px; height:48px; border-radius:14px; background:rgba(212,129,58,0.15); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.cc-label { font-size:10px; font-weight:700; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-bottom:4px; }
+.cc-value { font-family:'Noto Serif KR', serif; font-size:18px; font-weight:700; color:white; }
+
+.contact-optime {
+  margin-top:24px; padding:20px 24px;
+  background:rgba(122,158,126,0.12); border:1px solid rgba(122,158,126,0.2);
+  border-radius:16px; font-size:13px; line-height:1.9; color:rgba(255,255,255,0.6);
+}
+.contact-optime strong { color:var(--sage-light); }
+
+/* FOOTER */
+footer { background:#1e140c; padding:32px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-family:'Noto Serif KR', serif; font-size:20px; font-weight:900; color:var(--amber); }
+.footer-info { font-size:11px; color:rgba(255,255,255,0.3); line-height:1.8; text-align:right; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pawBounce { 0%,100% { transform:translateY(0) rotate(-5deg); } 50% { transform:translateY(-12px) rotate(5deg); } }
+@keyframes heartbeat { 0%,100% { transform:scale(1); } 50% { transform:scale(1.08); } }
+@keyframes walkCycle { 0%,100% { transform:translateX(0); } 50% { transform:translateX(6px); } }
+
+/* MOBILE */
+@media (max-width:900px) {
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .hero { padding:100px 24px 60px; }
+  .hero-visual { display:none; }
+  section { padding:60px 24px; }
+  .service-feature { grid-template-columns:1fr; }
+  .service-feature .sf-visual { min-height:240px; }
+  .service-feature.reverse { direction:ltr; }
+  .pi-row { grid-template-columns:1fr auto; }
+  .pi-bar-area { display:none; }
+  footer { padding:24px; }
+  .footer-info { text-align:left; }
+  .marketing-bar { padding:16px 24px; font-size:13px; }
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">올케어</a>
+  <a href="#" class="nav-logo">올<span>케</span>어</a>
   <ul class="nav-links">
     <li><a href="#services">서비스</a></li>
+    <li><a href="#pricing">요금안내</a></li>
     <li><a href="#why">특장점</a></li>
-    <li><a href="#area">운행지역</a></li>
     <li><a href="#contact" class="nav-cta">예약하기</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">잠실 프리미엄 이동 케어 서비스 · 올케어</div>
-  <h1 class="hero-title">
-    소중한 존재를<br>
-    <span>안전하게 모십니다</span>
-  </h1>
-  <p class="hero-sub">
-    픽업부터 귀가까지 <strong style="color:var(--gold)">올케어</strong>.<br>
-    반려동물 전용 픽업부터 어르신 병원 동행까지.<br>
-    예약제로 운영되는 잠실·송파 프리미엄 이동 서비스입니다.
-  </p>
-  <div class="hero-cta-group">
-    <a href="#contact" class="btn-primary">카카오톡으로 예약</a>
-    <a href="#services" class="btn-secondary">서비스 보기 →</a>
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">잠실·송파 프리미엄 이동 케어</div>
+    <h1 class="hero-title">
+      픽업부터 귀가까지<br>
+      <span class="accent">올케어</span>가<br>
+      함께합니다
+    </h1>
+    <p class="hero-sub">
+      반려동물 이동부터 어르신 병원 동행까지.<br>
+      소중한 존재를 내 가족처럼 모시는 서비스입니다.
+    </p>
+    <div class="hero-btns">
+      <a href="tel:010-7472-5896" class="btn-warm">📞 010-7472-5896</a>
+      <a href="#services" class="btn-outline">서비스 보기</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge-item">
+        <span class="badge-icon">🐾</span>
+        <span>반려동물 이동</span>
+      </div>
+      <div class="hero-badge-item">
+        <span class="badge-icon">🏥</span>
+        <span>어르신 병원 동행</span>
+      </div>
+      <div class="hero-badge-item">
+        <span class="badge-icon">🚗</span>
+        <span>대형 SUV 전용차량</span>
+      </div>
+    </div>
   </div>
-  <div class="hero-scroll">스크롤</div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">24h</div>
-      <div class="stat-label">전날까지 예약</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">SUV</div>
-      <div class="stat-label">싼타페 전용차량</div>
-    </div>
+
+  <div class="hero-visual">
+    <svg viewBox="0 0 480 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="240" cy="380" rx="200" ry="20" fill="rgba(139,107,74,0.12)"/>
+      <defs>
+        <linearGradient id="carGrad" x1="60" y1="270" x2="420" y2="380" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#e8973f"/>
+          <stop offset="100%" stop-color="#c07830"/>
+        </linearGradient>
+        <linearGradient id="windowGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d4eef7" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#b8d8ea" stop-opacity="0.7"/>
+        </linearGradient>
+      </defs>
+      <rect x="60" y="270" width="360" height="110" rx="18" fill="url(#carGrad)"/>
+      <path d="M130 270 C140 200 180 170 240 165 C300 170 340 200 350 270Z" fill="#c07830"/>
+      <path d="M148 268 C152 220 175 198 220 195 L220 268Z" fill="url(#windowGrad)" opacity="0.85"/>
+      <path d="M228 268 L228 193 C268 192 300 212 308 268Z" fill="url(#windowGrad)" opacity="0.85"/>
+      <line x1="224" y1="192" x2="224" y2="268" stroke="#c07830" stroke-width="4"/>
+      <line x1="224" y1="270" x2="224" y2="380" stroke="rgba(0,0,0,0.15)" stroke-width="2"/>
+      <rect x="175" y="320" width="30" height="8" rx="4" fill="rgba(0,0,0,0.2)"/>
+      <rect x="275" y="320" width="30" height="8" rx="4" fill="rgba(0,0,0,0.2)"/>
+      <circle cx="130" cy="368" r="42" fill="#2c1f14"/>
+      <circle cx="130" cy="368" r="32" fill="#3d3d3d"/>
+      <circle cx="130" cy="368" r="16" fill="#c07830"/>
+      <circle cx="130" cy="368" r="6" fill="#2c1f14"/>
+      <circle cx="350" cy="368" r="42" fill="#2c1f14"/>
+      <circle cx="350" cy="368" r="32" fill="#3d3d3d"/>
+      <circle cx="350" cy="368" r="16" fill="#c07830"/>
+      <circle cx="350" cy="368" r="6" fill="#2c1f14"/>
+      <rect x="145" y="340" width="90" height="26" rx="6" fill="white" opacity="0.9"/>
+      <text x="190" y="358" font-family="Noto Serif KR" font-size="13" font-weight="900" fill="#d4813a" text-anchor="middle">올케어</text>
+      <g transform="translate(258, 200)" style="animation: pawBounce 2s ease-in-out infinite;">
+        <ellipse cx="30" cy="42" rx="22" ry="18" fill="#c9a070"/>
+        <circle cx="30" cy="18" r="16" fill="#d4b080"/>
+        <ellipse cx="16" cy="10" rx="8" ry="12" fill="#c9a070" transform="rotate(-15,16,10)"/>
+        <ellipse cx="44" cy="10" rx="8" ry="12" fill="#c9a070" transform="rotate(15,44,10)"/>
+        <circle cx="24" cy="16" r="4" fill="#2c1f14"/>
+        <circle cx="36" cy="16" r="4" fill="#2c1f14"/>
+        <circle cx="25.5" cy="14.5" r="1.5" fill="white"/>
+        <circle cx="37.5" cy="14.5" r="1.5" fill="white"/>
+        <ellipse cx="30" cy="22" rx="4" ry="3" fill="#8b5c3a"/>
+        <path d="M25 26 Q30 31 35 26" stroke="#8b5c3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="30" cy="30" rx="4" ry="5" fill="#e87878"/>
+        <ellipse cx="54" cy="38" rx="7" ry="5" fill="#c9a070" transform="rotate(-30,54,38)"/>
+        <circle cx="56" cy="33" r="3" fill="#c9a070"/>
+        <text x="62" y="15" font-size="14" fill="#e87878" style="animation: heartbeat 1.5s ease-in-out infinite;">❤️</text>
+      </g>
+      <g transform="translate(158, 210)">
+        <circle cx="22" cy="18" r="12" fill="#f0c880"/>
+        <polygon points="12,8 16,0 20,8" fill="#e8a840"/>
+        <polygon points="24,8 28,0 32,8" fill="#e8a840"/>
+        <circle cx="18" cy="17" r="3" fill="#2c1f14"/>
+        <circle cx="26" cy="17" r="3" fill="#2c1f14"/>
+        <ellipse cx="22" cy="22" rx="3" ry="2" fill="#e8a0a0"/>
+        <path d="M18 25 Q22 28 26 25" stroke="#8b5c3a" stroke-width="1" fill="none"/>
+      </g>
+      <g opacity="0.3" fill="#d4813a">
+        <circle cx="70" cy="160" r="5"/>
+        <circle cx="82" cy="155" r="5"/>
+        <circle cx="60" cy="148" r="4"/>
+        <circle cx="75" cy="143" r="4"/>
+      </g>
+      <g opacity="0.2" fill="#7a9e7e">
+        <circle cx="390" cy="200" r="4"/>
+        <circle cx="400" cy="194" r="4"/>
+        <circle cx="384" cy="186" r="3"/>
+        <circle cx="396" cy="182" r="3"/>
+      </g>
+    </svg>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="section-header">
-    <div class="section-tag">Services</div>
-    <h2 class="section-title">두 가지 전문 서비스</h2>
+  <div class="section-label">Services</div>
+  <h2 class="section-title">두 가지 따뜻한 서비스</h2>
+
+  <div class="services-wrapper">
+
+    <!-- PET SERVICE -->
+    <div class="service-feature">
+      <div class="sf-visual">
+        <div class="pet-illustration">
+          <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px">
+            <rect width="360" height="320" fill="url(#petBg)" rx="20"/>
+            <defs>
+              <radialGradient id="petBg" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#fff8f0"/>
+                <stop offset="100%" stop-color="#fde8d0"/>
+              </radialGradient>
+              <linearGradient id="carGrad2" x1="50" y1="200" x2="310" y2="270">
+                <stop offset="0%" stop-color="#e8973f"/>
+                <stop offset="100%" stop-color="#c07830"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="240" width="360" height="80" rx="0" fill="#e8d8c4" opacity="0.5"/>
+            <rect x="0" y="256" width="360" height="4" fill="#d4c4b0" opacity="0.5"/>
+            <rect x="20" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="80" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="140" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="200" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="260" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="320" y="274" width="40" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="50" y="200" width="260" height="70" rx="12" fill="url(#carGrad2)"/>
+            <path d="M100 200 C108 155 135 138 180 135 C225 138 252 155 260 200Z" fill="#c07830"/>
+            <path d="M114 198 C117 166 136 152 168 150 L168 198Z" fill="#d4eef7" opacity="0.85"/>
+            <path d="M176 198 L176 149 C208 150 228 165 246 198Z" fill="#d4eef7" opacity="0.85"/>
+            <line x1="172" y1="148" x2="172" y2="198" stroke="#c07830" stroke-width="3"/>
+            <circle cx="110" cy="264" r="30" fill="#2c1f14"/>
+            <circle cx="110" cy="264" r="22" fill="#3d3d3d"/>
+            <circle cx="110" cy="264" r="11" fill="#d4813a"/>
+            <circle cx="250" cy="264" r="30" fill="#2c1f14"/>
+            <circle cx="250" cy="264" r="22" fill="#3d3d3d"/>
+            <circle cx="250" cy="264" r="11" fill="#d4813a"/>
+            <rect x="140" y="232" width="80" height="22" rx="5" fill="white" opacity="0.9"/>
+            <text x="180" y="248" font-family="Noto Serif KR" font-size="11" font-weight="900" fill="#d4813a" text-anchor="middle">올케어</text>
+            <g transform="translate(118, 140)" style="animation: pawBounce 2.5s ease-in-out infinite;">
+              <ellipse cx="25" cy="38" rx="20" ry="16" fill="#d4b080"/>
+              <circle cx="25" cy="18" r="15" fill="#e0bf94"/>
+              <ellipse cx="11" cy="14" rx="9" ry="13" fill="#c9a070" transform="rotate(-20,11,14)"/>
+              <ellipse cx="39" cy="14" rx="9" ry="13" fill="#c9a070" transform="rotate(20,39,14)"/>
+              <circle cx="19" cy="15" r="5" fill="#1a0f08"/>
+              <circle cx="31" cy="15" r="5" fill="#1a0f08"/>
+              <circle cx="20.5" cy="13.5" r="2" fill="white"/>
+              <circle cx="32.5" cy="13.5" r="2" fill="white"/>
+              <ellipse cx="25" cy="21" rx="4" ry="3" fill="#6b3a20"/>
+              <path d="M20 25 Q25 30 30 25" stroke="#6b3a20" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <ellipse cx="25" cy="29" rx="4" ry="5" fill="#e87878"/>
+              <ellipse cx="46" cy="32" rx="7" ry="5" fill="#d4b080" transform="rotate(-25,46,32)"/>
+              <circle cx="49" cy="27" r="3.5" fill="#d4b080"/>
+            </g>
+            <g transform="translate(195, 148)">
+              <ellipse cx="22" cy="36" rx="18" ry="14" fill="#f0c060"/>
+              <circle cx="22" cy="20" r="13" fill="#f8d070"/>
+              <polygon points="10,10 14,0 20,10" fill="#e8b050"/>
+              <polygon points="24,10 30,0 34,10" fill="#e8b050"/>
+              <ellipse cx="17" cy="19" rx="4" ry="3" fill="#1a0f08"/>
+              <ellipse cx="27" cy="19" rx="4" ry="3" fill="#1a0f08"/>
+              <circle cx="18" cy="18" r="1.5" fill="white"/>
+              <circle cx="28" cy="18" r="1.5" fill="white"/>
+              <polygon points="22,23 20,26 24,26" fill="#e8a0a0"/>
+              <line x1="8" y1="24" x2="18" y2="26" stroke="#8b6b4a" stroke-width="0.8"/>
+              <line x1="8" y1="28" x2="18" y2="28" stroke="#8b6b4a" stroke-width="0.8"/>
+              <line x1="26" y1="26" x2="36" y2="24" stroke="#8b6b4a" stroke-width="0.8"/>
+              <line x1="26" y1="28" x2="36" y2="28" stroke="#8b6b4a" stroke-width="0.8"/>
+            </g>
+            <text x="52" y="90" font-size="18" opacity="0.5" style="animation:heartbeat 2s ease-in-out infinite">❤️</text>
+            <text x="288" y="80" font-size="14" opacity="0.4" style="animation:heartbeat 2.5s ease-in-out infinite 0.5s">🐾</text>
+            <text x="30" y="180" font-size="12" opacity="0.35">✨</text>
+            <text x="310" y="170" font-size="12" opacity="0.35">✨</text>
+            <circle cx="310" cy="50" r="35" fill="rgba(248,200,100,0.15)"/>
+            <circle cx="310" cy="50" r="24" fill="rgba(248,200,100,0.2)"/>
+            <circle cx="310" cy="50" r="14" fill="rgba(248,200,100,0.3)"/>
+            <ellipse cx="30" cy="190" rx="18" ry="22" fill="rgba(122,158,126,0.35)"/>
+            <rect x="27" y="210" width="6" height="20" fill="rgba(139,107,74,0.3)"/>
+            <ellipse cx="335" cy="185" rx="16" ry="20" fill="rgba(122,158,126,0.3)"/>
+            <rect x="332" y="203" width="6" height="18" fill="rgba(139,107,74,0.25)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="sf-content">
+        <div class="sf-tag">🐾 반려동물 이동</div>
+        <div class="sf-title">우리 아이,<br>안심하고 맡기세요</div>
+        <div class="sf-desc">
+          동물병원·미용샵 픽업부터 전국 장거리까지.<br>
+          대형견·고양이 모두 환영합니다.<br>
+          보호자 없이 단독 이동도 가능합니다.
+        </div>
+        <div class="sf-highlight">
+          🚗 케이지 차량 상시 구비 — <strong>빈손으로 타셔도 됩니다</strong><br>
+          📸 운행 중 상태 사진 실시간 카톡 전송
+        </div>
+        <div class="price-grid">
+          <div class="price-chip">
+            <div class="pc-type">단거리 10km 이내</div>
+            <div class="pc-val">5만원</div>
+            <div class="pc-note">보호자 동반</div>
+          </div>
+          <div class="price-chip">
+            <div class="pc-type">단독 이동</div>
+            <div class="pc-val">4만원~</div>
+            <div class="pc-note">보호자 없이</div>
+          </div>
+          <div class="price-chip">
+            <div class="pc-type">중거리 10~30km</div>
+            <div class="pc-val">8만원~</div>
+            <div class="pc-note">강남·분당 포함</div>
+          </div>
+          <div class="price-chip featured">
+            <div class="pc-type">장거리 전국</div>
+            <div class="pc-val">15만원~</div>
+            <div class="pc-note">편도 기준</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ELDERLY SERVICE -->
+    <div class="service-feature reverse">
+      <div class="sf-visual sage-bg">
+        <div class="elderly-scene-wrapper">
+          <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px">
+            <defs>
+              <radialGradient id="elderlyBg" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#f0f7f0"/>
+                <stop offset="100%" stop-color="#d8eedd"/>
+              </radialGradient>
+              <linearGradient id="elderlyCarGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7a9e7e"/>
+                <stop offset="100%" stop-color="#5a8060"/>
+              </linearGradient>
+            </defs>
+            <rect width="360" height="320" fill="url(#elderlyBg)" rx="20"/>
+            <rect x="260" y="80" width="80" height="140" rx="6" fill="rgba(255,255,255,0.5)"/>
+            <rect x="275" y="95" width="20" height="20" rx="3" fill="rgba(122,158,126,0.3)"/>
+            <rect x="305" y="95" width="20" height="20" rx="3" fill="rgba(122,158,126,0.3)"/>
+            <rect x="275" y="125" width="20" height="20" rx="3" fill="rgba(122,158,126,0.3)"/>
+            <rect x="305" y="125" width="20" height="20" rx="3" fill="rgba(122,158,126,0.3)"/>
+            <rect x="291" y="60" width="18" height="6" rx="2" fill="#e87878" opacity="0.7"/>
+            <rect x="296" y="55" width="8" height="16" rx="2" fill="#e87878" opacity="0.7"/>
+            <text x="300" y="230" font-size="10" fill="rgba(122,158,126,0.6)" font-weight="600" text-anchor="middle">병원</text>
+            <rect x="0" y="240" width="360" height="80" fill="rgba(210,230,210,0.4)"/>
+            <rect x="0" y="256" width="360" height="3" fill="rgba(140,180,140,0.3)"/>
+            <rect x="30" y="200" width="220" height="60" rx="10" fill="url(#elderlyCarGrad)"/>
+            <path d="M75 200 C82 162 105 148 140 145 C175 148 198 162 205 200Z" fill="#5a8060"/>
+            <path d="M88 198 C91 172 108 160 134 158 L134 198Z" fill="#d4eef7" opacity="0.85"/>
+            <path d="M140 198 L140 157 C166 158 185 170 196 198Z" fill="#d4eef7" opacity="0.85"/>
+            <line x1="137" y1="157" x2="137" y2="198" stroke="#5a8060" stroke-width="2.5"/>
+            <circle cx="85" cy="254" r="26" fill="#2c3828"/>
+            <circle cx="85" cy="254" r="18" fill="#3d4a3a"/>
+            <circle cx="85" cy="254" r="9" fill="#7a9e7e"/>
+            <circle cx="195" cy="254" r="26" fill="#2c3828"/>
+            <circle cx="195" cy="254" r="18" fill="#3d4a3a"/>
+            <circle cx="195" cy="254" r="9" fill="#7a9e7e"/>
+            <rect x="98" y="222" width="84" height="20" rx="5" fill="white" opacity="0.9"/>
+            <text x="140" y="236" font-family="Noto Serif KR" font-size="10" font-weight="900" fill="#7a9e7e" text-anchor="middle">올케어</text>
+            <g transform="translate(40, 90)">
+              <rect x="14" y="62" width="28" height="50" rx="8" fill="#6b9e8a"/>
+              <rect x="24" y="52" width="12" height="14" rx="4" fill="#f5c89a"/>
+              <circle cx="30" cy="40" r="20" fill="#f5c89a"/>
+              <ellipse cx="30" cy="23" rx="20" ry="10" fill="#3d2b1f"/>
+              <ellipse cx="13" cy="34" rx="5" ry="10" fill="#3d2b1f"/>
+              <ellipse cx="47" cy="34" rx="5" ry="10" fill="#3d2b1f"/>
+              <path d="M22 38 Q25 41 28 38" stroke="#3d2b1f" stroke-width="1.5" fill="none"/>
+              <path d="M32 38 Q35 41 38 38" stroke="#3d2b1f" stroke-width="1.5" fill="none"/>
+              <path d="M24 46 Q30 52 36 46" stroke="#8b5c3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="-10" y="74" width="26" height="8" rx="4" fill="#6b9e8a" transform="rotate(-15,-10,74)"/>
+              <circle cx="-6" cy="84" r="7" fill="#f5c89a"/>
+              <rect x="14" y="108" width="12" height="32" rx="5" fill="#4a7060"/>
+              <rect x="30" y="108" width="12" height="32" rx="5" fill="#4a7060"/>
+              <ellipse cx="20" cy="142" rx="10" ry="5" fill="#2c1f14"/>
+              <ellipse cx="36" cy="142" rx="10" ry="5" fill="#2c1f14"/>
+              <rect x="20" y="72" width="20" height="14" rx="3" fill="white" opacity="0.8"/>
+              <rect x="22" y="74" width="16" height="3" rx="1" fill="rgba(122,158,126,0.5)"/>
+              <rect x="22" y="79" width="10" height="2" rx="1" fill="rgba(122,158,126,0.3)"/>
+            </g>
+            <g transform="translate(170, 100)">
+              <path d="M14 65 Q12 90 16 112" stroke="#c09060" stroke-width="26" stroke-linecap="round" fill="none"/>
+              <path d="M14 65 Q12 90 16 112" stroke="#e8c890" stroke-width="22" stroke-linecap="round" fill="none"/>
+              <rect x="18" y="52" width="12" height="16" rx="4" fill="#e8c090"/>
+              <circle cx="24" cy="38" r="18" fill="#f0c898"/>
+              <ellipse cx="24" cy="23" rx="18" ry="9" fill="#e8e4dc"/>
+              <ellipse cx="8" cy="32" rx="5" ry="9" fill="#e8e4dc"/>
+              <ellipse cx="40" cy="32" rx="5" ry="9" fill="#e8e4dc"/>
+              <circle cx="18" cy="37" r="3" fill="#5a4030"/>
+              <circle cx="30" cy="37" r="3" fill="#5a4030"/>
+              <path d="M14 42 Q18 44 22 42" stroke="rgba(139,107,74,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M26 42 Q30 44 34 42" stroke="rgba(139,107,74,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M18 44 Q24 50 30 44" stroke="#8b5c3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <rect x="-20" y="72" width="22" height="7" rx="3.5" fill="#e8c890" transform="rotate(10,-20,72)"/>
+              <circle cx="-16" cy="80" r="6" fill="#e8c090"/>
+              <line x1="44" y1="70" x2="56" y2="148" stroke="#8b6b4a" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="43" cy="68" rx="8" ry="5" fill="#6b4a2a"/>
+              <rect x="16" y="108" width="10" height="30" rx="4" fill="#8a7060"/>
+              <rect x="30" y="108" width="10" height="30" rx="4" fill="#8a7060"/>
+              <ellipse cx="21" cy="140" rx="9" ry="4" fill="#4a3020"/>
+              <ellipse cx="35" cy="140" rx="9" ry="4" fill="#4a3020"/>
+            </g>
+            <path d="M80 170 Q110 155 140 160" stroke="rgba(212,129,58,0.3)" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+            <text x="100" y="145" font-size="20" text-anchor="middle" style="animation:heartbeat 2s ease-in-out infinite">❤️</text>
+            <rect x="8" y="30" width="42" height="54" rx="8" fill="white" opacity="0.75"/>
+            <text x="12" y="46" font-size="8" fill="#7a9e7e" font-weight="700">진료동행</text>
+            <line x1="12" y1="54" x2="44" y2="54" stroke="rgba(122,158,126,0.2)" stroke-width="0.5"/>
+            <text x="12" y="64" font-size="7" fill="rgba(90,128,90,0.8)">✅ 픽업</text>
+            <text x="12" y="74" font-size="7" fill="rgba(90,128,90,0.8)">✅ 접수</text>
+            <text x="12" y="84" font-size="7" fill="rgba(90,128,90,0.8)">✅ 귀가</text>
+            <circle cx="330" cy="50" r="4" fill="rgba(122,158,126,0.3)"/>
+            <circle cx="345" cy="65" r="6" fill="rgba(122,158,126,0.2)"/>
+            <circle cx="320" cy="70" r="3" fill="rgba(122,158,126,0.25)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="sf-content">
+        <div class="sf-tag green">🏥 어르신 병원 동행</div>
+        <div class="sf-title">부모님 곁에<br>제가 있겠습니다</div>
+        <div class="sf-desc">
+          거동은 가능하나 혼자 대중교통 이용이 어려우신 어르신을 위한 서비스입니다.<br>
+          자차 픽업부터 접수·대기·귀가까지 전 과정 동행.<br>
+          진료 내용을 정리해 자녀분께 카톡으로 전달드립니다.
+        </div>
+        <div class="sf-highlight green-hl">
+          ✅ 차량비 포함 — 명시 금액이 최종입니다<br>
+          ⚠️ 중증 와상·치매는 전문 요양 서비스 이용 권장
+        </div>
+        <div class="price-grid">
+          <div class="price-chip green-chip">
+            <div class="pc-type">기본 3시간 이내</div>
+            <div class="pc-val">10만원</div>
+            <div class="pc-note">픽업+대기+귀가</div>
+          </div>
+          <div class="price-chip green-chip">
+            <div class="pc-type">반일 3~5시간</div>
+            <div class="pc-val">15만원</div>
+            <div class="pc-note">복수검사 포함</div>
+          </div>
+          <div class="price-chip green-chip">
+            <div class="pc-type">대형병원 원정</div>
+            <div class="pc-val">20만원~</div>
+            <div class="pc-note">아산·삼성·세브란스</div>
+          </div>
+          <div class="price-chip featured-green">
+            <div class="pc-type">월정액 정기 4회</div>
+            <div class="pc-val">40만원~</div>
+            <div class="pc-note">재활·항암·투석 정기</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="services-grid">
+</section>
 
-    <div class="service-card">
-      <div class="service-icon">🐾</div>
-      <div class="service-title">반려동물 이동 서비스</div>
-      <div class="service-desc">
-        동물병원·미용샵 픽업부터 귀가까지.<br>
-        대형견·고양이 모두 가능. 케이지 고정 완비.<br>
-        <strong style="color:var(--gold)">보호자 없이 단독 이동도 가능합니다.</strong>
+<!-- PRICING INFOGRAPHIC -->
+<section class="pricing-section" id="pricing">
+  <div class="section-label">전체 요금표</div>
+  <h2 class="section-title">한눈에 보는 요금 안내</h2>
+  <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:12px;">
+    * 어르신 동행 서비스 요금에는 차량비가 모두 포함되어 있습니다.
+  </p>
+
+  <div class="pricing-tabs">
+    <button class="ptab active" onclick="switchTab('pet',this)">🐾 반려동물 이동</button>
+    <button class="ptab" onclick="switchTab('senior',this)">🏥 어르신 병원 동행</button>
+  </div>
+
+  <div class="pricing-content">
+
+    <div class="pricing-panel active" id="tab-pet">
+      <div class="pricing-infographic">
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge">단독이동</div>
+            <div class="pi-name">보호자 없이 단독 이동</div>
+            <div class="pi-includes">
+              <span class="pi-tag">픽업</span>
+              <span class="pi-tag">목적지 인도</span>
+              <span class="pi-tag">사진전송</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">케이지 차량 구비 · 빈손으로 OK</div>
+            <div class="pi-bar"><div class="pi-bar-fill" style="width:35%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">4만원~</div>
+            <div class="pi-price-sub">단거리 기준</div>
+          </div>
+        </div>
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge">단거리</div>
+            <div class="pi-name">단거리 픽업·귀가</div>
+            <div class="pi-includes">
+              <span class="pi-tag">픽업</span>
+              <span class="pi-tag">보호자동반</span>
+              <span class="pi-tag">귀가</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">10km 이내 · 잠실·송파 중심</div>
+            <div class="pi-bar"><div class="pi-bar-fill" style="width:45%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">5만원</div>
+            <div class="pi-price-sub">보호자 동반</div>
+          </div>
+        </div>
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge">중거리</div>
+            <div class="pi-name">중거리 이동</div>
+            <div class="pi-includes">
+              <span class="pi-tag">강남</span>
+              <span class="pi-tag">강동</span>
+              <span class="pi-tag">분당</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">10~30km · 수도권 주요 지역</div>
+            <div class="pi-bar"><div class="pi-bar-fill" style="width:60%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">8만원~</div>
+            <div class="pi-price-sub">거리별 협의</div>
+          </div>
+        </div>
+        <div class="pi-row top-pick">
+          <div class="pi-type-area">
+            <div class="pi-badge hot">🔥 인기</div>
+            <div class="pi-name">장거리 전국 운행</div>
+            <div class="pi-includes">
+              <span class="pi-tag">전국</span>
+              <span class="pi-tag">단독탁송</span>
+              <span class="pi-tag">토요일종일</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">30km+ · 토요일 장거리 종일 운행</div>
+            <div class="pi-bar"><div class="pi-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">15만원~</div>
+            <div class="pi-price-sub">편도 기준</div>
+          </div>
+        </div>
       </div>
-      <div class="service-price">4만원~</div>
-      <div class="service-price-label">단거리 기준 · 아래 요금표에서 클릭해 상세 확인</div>
-      <div class="service-arrow">→</div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">🏥</div>
-      <div class="service-title">어르신 병원 동행 서비스</div>
-      <div class="service-desc">
-        <strong style="color:var(--gold)">자차 픽업 + 접수 + 대기 + 진료 보조 + 귀가</strong> 일체.<br>
-        교통비 추가 없음 — 명시 금액이 최종입니다.<br>
-        진료 내용 정리 후 보호자(자녀)께 전달.
+    <div class="pricing-panel" id="tab-senior">
+      <div class="pricing-infographic">
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge green">기본동행</div>
+            <div class="pi-name">기본 동행 (3시간)</div>
+            <div class="pi-includes">
+              <span class="pi-tag">픽업</span>
+              <span class="pi-tag">접수도움</span>
+              <span class="pi-tag">대기</span>
+              <span class="pi-tag">귀가</span>
+              <span class="pi-tag">내용전달</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">차량비 포함 · 모든 비용 포함 단가</div>
+            <div class="pi-bar"><div class="pi-bar-fill green" style="width:50%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">10만원</div>
+            <div class="pi-price-sub">추가비용 없음</div>
+          </div>
+        </div>
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge green">반일동행</div>
+            <div class="pi-name">반일 동행 (3~5시간)</div>
+            <div class="pi-includes">
+              <span class="pi-tag">복수검사</span>
+              <span class="pi-tag">장시간대기</span>
+              <span class="pi-tag">전과정</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">검사 많은 날 · 차량비 포함</div>
+            <div class="pi-bar"><div class="pi-bar-fill green" style="width:65%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">15만원</div>
+            <div class="pi-price-sub">추가비용 없음</div>
+          </div>
+        </div>
+        <div class="pi-row">
+          <div class="pi-type-area">
+            <div class="pi-badge green">원정동행</div>
+            <div class="pi-name">대형병원 원정 동행</div>
+            <div class="pi-includes">
+              <span class="pi-tag">아산병원</span>
+              <span class="pi-tag">삼성서울</span>
+              <span class="pi-tag">세브란스</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">장거리 포함 · 차량비 포함</div>
+            <div class="pi-bar"><div class="pi-bar-fill green" style="width:75%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">20만원~</div>
+            <div class="pi-price-sub">거리별 협의</div>
+          </div>
+        </div>
+        <div class="pi-row top-pick sage-pick">
+          <div class="pi-type-area">
+            <div class="pi-badge hot">💚 추천</div>
+            <div class="pi-name">월정액 정기 패키지</div>
+            <div class="pi-includes">
+              <span class="pi-tag">월4회</span>
+              <span class="pi-tag">재활</span>
+              <span class="pi-tag">항암</span>
+              <span class="pi-tag">투석</span>
+            </div>
+          </div>
+          <div class="pi-bar-area">
+            <div class="pi-desc">정기 병원 방문 · 건당 10만원 절감</div>
+            <div class="pi-bar"><div class="pi-bar-fill green" style="width:90%"></div></div>
+          </div>
+          <div class="pi-price-area">
+            <div class="pi-price">40만원~</div>
+            <div class="pi-price-sub">월 정액</div>
+          </div>
+        </div>
       </div>
-      <div class="service-price">10만원~</div>
-      <div class="service-price-label">기본 3시간 기준 · 아래 요금표에서 클릭해 상세 확인</div>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🚗</div>
-      <div class="service-title">장거리 전국 운행</div>
-      <div class="service-desc">
-        서울 출발 전국 어디든 운행 가능.<br>
-        반려동물 동반 여행·귀성 이동·원정 진료.<br>
-        <strong style="color:var(--gold)">반려동물 단독 전국 탁송도 가능합니다.</strong>
+      <div class="included-note">
+        <span class="note-icon">✅</span>
+        <span>
+          <strong style="color:var(--sage-light)">어르신 동행 서비스는 모든 요금이 포함가격입니다.</strong><br>
+          자차 픽업·이동 · 병원 접수 도움 · 대기 · 진료 보조 · 귀가 · 자녀분께 진료내용 카카오톡 전송까지
+          명시된 금액이 최종입니다. 주차비·톨비 등 일체 추가 없습니다.
+        </span>
       </div>
-      <div class="service-price">15만원~</div>
-      <div class="service-price-label">수도권 외 편도 기준 · 거리에 따라 협의</div>
-      <div class="service-arrow">→</div>
     </div>
-
   </div>
 </section>
 
 <!-- WHY -->
-<section class="why" id="why">
-  <div class="section-header">
-    <div class="section-tag" style="color:rgba(201,168,76,0.8)">Why Us</div>
-    <h2 class="section-title">케어무브를 선택하는 이유</h2>
-  </div>
+<section class="why-section" id="why">
+  <div class="section-label">Why AllCare</div>
+  <h2 class="section-title">올케어를 선택하는<br>4가지 이유</h2>
   <div class="why-grid">
-    <div class="why-item">
+    <div class="why-card">
+      <div class="why-icon">🚗</div>
       <div class="why-num">01</div>
-      <div class="why-title">예약제 전용 운영</div>
-      <div class="why-desc">즉흥 호출 없이 전날까지 예약만 받습니다. 스케줄을 미리 잡아두면 기다림 없이 정확한 시간에 픽업합니다.</div>
+      <div class="why-title">대형 SUV · 케이지 상시 구비</div>
+      <div class="why-desc">넉넉한 대형 SUV로 대형견·케이지도 여유 있게 탑승 가능합니다. 소·중·대형 케이지 차량 구비 — 빈손으로 타셔도 됩니다.</div>
     </div>
-    <div class="why-item">
+    <div class="why-card">
+      <div class="why-icon">📋</div>
       <div class="why-num">02</div>
-      <div class="why-title">싼타페 전용 공간</div>
-      <div class="why-desc">넉넉한 SUV 공간으로 대형견, 다수 케이지, 휠체어도 무리 없이 탑승 가능합니다. 방수 커버 및 소독 완비.</div>
+      <div class="why-title">예약제 전용 운영</div>
+      <div class="why-desc">전날까지 예약만 받습니다. 갑작스러운 호출 없이 정확한 시간에 도착하는 신뢰할 수 있는 서비스입니다.</div>
     </div>
-    <div class="why-item">
+    <div class="why-card">
+      <div class="why-icon green-icon">📸</div>
       <div class="why-num">03</div>
-      <div class="why-title">운행 후 사진 전송</div>
-      <div class="why-desc">반려동물 운행 후 상태 사진을 보호자께 전송합니다. 어르신 동행 후 진료 내용도 정리해 전달드립니다.</div>
+      <div class="why-title">실시간 상황 공유</div>
+      <div class="why-desc">운행 중 상태 사진, 진료 후 내용 정리를 보호자께 직접 전송합니다. 멀리 계셔도 안심하실 수 있습니다.</div>
     </div>
-    <div class="why-item">
+    <div class="why-card">
+      <div class="why-icon green-icon">💰</div>
       <div class="why-num">04</div>
-      <div class="why-title">정기 고객 월정액</div>
-      <div class="why-desc">동물병원 정기 방문, 재활 치료 정기 동행 등 월정액 패키지로 더 저렴하게 이용 가능합니다.</div>
-    </div>
-  </div>
-</section>
-
-<!-- SCHEDULE -->
-<section class="schedule">
-  <div class="section-header">
-    <div class="section-tag">Price Guide</div>
-    <h2 class="section-title">전체 요금 한눈에 보기</h2>
-  </div>
-
-  <div class="price-category-label">🐾 반려동물 이동 서비스</div>
-  <div class="schedule-list">
-    <div class="schedule-item clickable-row" onclick="openModal('pet_short')">
-      <div class="schedule-time">단거리</div>
-      <div class="schedule-info">
-        <div class="schedule-name">10km 이내 픽업·귀가</div>
-        <div class="schedule-label">보호자 동반 / 잠실·송파 동물병원·미용샵</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">5만원</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('pet_solo')">
-      <div class="schedule-time">단독</div>
-      <div class="schedule-info">
-        <div class="schedule-name">반려동물 혼자 이동 (보호자 없음)</div>
-        <div class="schedule-label">픽업 후 목적지 인도 · 단거리 기준</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">4만원~</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('pet_mid')">
-      <div class="schedule-time">중거리</div>
-      <div class="schedule-info">
-        <div class="schedule-name">10~30km 이동</div>
-        <div class="schedule-label">강남·강동·성남·분당 포함</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">8만원~</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('pet_long')">
-      <div class="schedule-time">장거리</div>
-      <div class="schedule-info">
-        <div class="schedule-name">30km+ 전국 운행</div>
-        <div class="schedule-label">수도권 외 / 단독 탁송 포함</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">15만원~</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="price-category-label" style="margin-top:48px">🏥 어르신 병원 동행 서비스</div>
-  <div class="notice-box">
-    ✓ 아래 모든 요금은 <strong>자차 픽업 + 접수 도움 + 대기 + 진료 보조 + 귀가</strong>까지 일체 포함입니다.<br>
-    ✓ 교통비·주차비 등 추가 비용 없음 — 명시된 금액이 최종 금액입니다.
-  </div>
-  <div class="schedule-list">
-    <div class="schedule-item clickable-row" onclick="openModal('silver_basic')">
-      <div class="schedule-time">기본</div>
-      <div class="schedule-info">
-        <div class="schedule-name">기본 동행 (3시간 이내)</div>
-        <div class="schedule-label">픽업 → 접수·대기 → 진료 보조 → 귀가 → 진료내용 전달</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">10만원</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('silver_half')">
-      <div class="schedule-time">반일</div>
-      <div class="schedule-info">
-        <div class="schedule-name">반일 동행 (3~5시간)</div>
-        <div class="schedule-label">복수 검사·장시간 대기 포함</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">15만원</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('silver_major')">
-      <div class="schedule-time">원정</div>
-      <div class="schedule-info">
-        <div class="schedule-name">대형병원 원정 동행</div>
-        <div class="schedule-label">서울아산·삼성·세브란스 등 / 장거리 포함</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">20만원~</div>
-        <div class="row-arrow">→</div>
-      </div>
-    </div>
-    <div class="schedule-item clickable-row" onclick="openModal('silver_monthly')">
-      <div class="schedule-time">월정액</div>
-      <div class="schedule-info">
-        <div class="schedule-name">정기 동행 패키지 (월 4회)</div>
-        <div class="schedule-label">재활·항암·투석 등 정기 병원 방문</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="schedule-price">40만원~</div>
-        <div class="row-arrow">→</div>
-      </div>
+      <div class="why-title">완전 포함 가격</div>
+      <div class="why-desc">어르신 동행 서비스는 차량비·주차비 포함 all-in 가격입니다. 예상치 못한 추가 비용이 없습니다.</div>
     </div>
   </div>
 </section>
 
 <!-- AREA -->
-<section class="area" id="area">
-  <div class="section-tag">운행 지역</div>
-  <h2 class="section-title">잠실·송파 중심<br>전국 장거리 운행</h2>
+<section class="area-section" id="area">
+  <div class="section-label" style="justify-content:center">운행 지역</div>
+  <h2 class="section-title">잠실 출발 · 전국 어디든</h2>
   <div class="area-tags">
     <div class="area-tag featured">잠실동</div>
     <div class="area-tag featured">송파구</div>
@@ -1281,608 +1094,299 @@
     <div class="area-tag">서초구</div>
     <div class="area-tag">광진구</div>
     <div class="area-tag">성남·분당</div>
-    <div class="area-tag">장거리 전국↗</div>
+    <div class="area-tag">하남·위례</div>
+    <div class="area-tag">장거리 전국 ↗</div>
   </div>
 </section>
 
-<!-- RESERVATION CALENDAR -->
-<section class="contact" id="contact">
-  <div style="max-width:800px">
-    <div class="section-tag">예약하기</div>
-    <h2 class="section-title" style="color:#fff;margin-bottom:8px">날짜와 시간을<br>직접 선택하세요</h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:40px;line-height:1.8">
-      ✓ 예약 가능(초록) 날짜 클릭 → 시간 선택 → 30초 신청 완료<br>
-      ✓ 목·일 휴무 · 토요일 장거리 종일 운행
-    </p>
+<!-- MARKETING BAR -->
+<div class="marketing-bar">
+  <span class="mb-icon">🧲</span>
+  <span>
+    <strong>동네 자연 홍보 중 —</strong>
+    올케어 자석 스티커를 부착한 대형 SUV가 잠실·송파를 운행합니다.
+    당근마켓에서 <strong>@올케어</strong>를 검색하세요.
+  </span>
+</div>
 
-    <div id="calWrap" style="background:var(--card-bg);border-radius:12px;padding:28px 24px">
-
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <button onclick="rcChangeMonth(-1)" style="background:none;border:1px solid rgba(0,0,0,0.12);padding:6px 14px;cursor:pointer;border-radius:6px;font-size:14px;color:#555">← 이전</button>
-        <div id="rcTitle" style="font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:#1a1a2e"></div>
-        <button onclick="rcChangeMonth(1)" style="background:none;border:1px solid rgba(0,0,0,0.12);padding:6px 14px;cursor:pointer;border-radius:6px;font-size:14px;color:#555">다음 →</button>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#E1F5EE;border:1px solid #1D9E75;display:inline-block"></span>예약 가능</span>
-        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#E6F1FB;border:1px solid #378ADD;display:inline-block"></span>토요일 장거리</span>
-        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#666"><span style="width:10px;height:10px;border-radius:2px;background:#FCEBEB;border:1px solid #E24B4A;display:inline-block"></span>마감</span>
-        <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#aaa"><span style="width:10px;height:10px;border-radius:2px;background:#eee;display:inline-block"></span>휴무</span>
-      </div>
-
-      <div id="rcGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">
-        <div style="text-align:center;font-size:11px;color:#E24B4A;padding:4px 0 8px;font-weight:500">일</div>
-        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">월</div>
-        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">화</div>
-        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">수</div>
-        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">목</div>
-        <div style="text-align:center;font-size:11px;color:#888;padding:4px 0 8px">금</div>
-        <div style="text-align:center;font-size:11px;color:#378ADD;padding:4px 0 8px;font-weight:500">토</div>
-      </div>
-
-      <div id="rcSlots" style="margin-top:20px"></div>
-      <div id="rcResList" style="margin-top:12px"></div>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:2px;margin-top:32px">
-      <a href="tel:010-7472-5896" class="contact-method">
-        <div class="contact-method-icon">📞</div>
-        <div class="contact-method-info">
-          <div class="contact-method-label">CALL</div>
-          <div class="contact-method-value">010 - 7472 - 5896</div>
-        </div>
-      </a>
-      <a href="#" class="contact-method">
-        <div class="contact-method-icon">💬</div>
-        <div class="contact-method-info">
-          <div class="contact-method-label">KAKAO</div>
-          <div class="contact-method-value">카카오톡 채널 @올케어</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="contact-note" style="margin-top:20px">
-      ✓ 예약은 이용일 전날까지 가능합니다<br>
-      ✓ 평일 운행: 오전 9시 ~ 오후 3시<br>
-      ✓ 토요일: 장거리·종일 운행 (별도 협의)
-    </div>
-  </div>
-</section>
-
-<style>
-.rc-day {
-  aspect-ratio:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border-radius:6px;
-  cursor:pointer;
-  border:1px solid transparent;
-  transition:all 0.15s;
-  position:relative;
-}
-.rc-day:hover:not(.rc-closed):not(.rc-past) { border-color:#1D9E75; }
-.rc-day.rc-today { border-color:#6b8f71 !important; }
-.rc-day.rc-closed { opacity:0.25; cursor:default; }
-.rc-day.rc-past { opacity:0.2; cursor:default; }
-.rc-day.rc-available { background:#E1F5EE; }
-.rc-day.rc-saturday { background:#E6F1FB; }
-.rc-day.rc-full { background:#FCEBEB; cursor:default; }
-.rc-day.rc-selected { background:#1D9E75 !important; }
-.rc-day.rc-selected .rc-num { color:#fff !important; }
-.rc-day.rc-selected .rc-dot { background:#fff !important; }
-.rc-num { font-size:13px; font-weight:600; color:#1a1a2e; }
-.rc-day.rc-available .rc-num { color:#0F6E56; }
-.rc-day.rc-saturday .rc-num { color:#185FA5; }
-.rc-day.rc-full .rc-num { color:#A32D2D; }
-.rc-dot { width:4px; height:4px; border-radius:50%; margin-top:2px; }
-.rc-day.rc-available .rc-dot { background:#1D9E75; }
-.rc-day.rc-saturday .rc-dot { background:#378ADD; }
-.rc-day.rc-full .rc-dot { background:#E24B4A; }
-.rc-slot { padding:10px 0; border:1px solid #e0ddd5; border-radius:6px; font-size:13px; cursor:pointer; background:#fff; color:#1a1a2e; transition:all 0.15s; text-align:center; }
-.rc-slot:hover:not(.rc-slot-full) { background:#f0faf5; border-color:#1D9E75; }
-.rc-slot.rc-slot-full { background:#FCEBEB; color:#A32D2D; cursor:default; font-size:11px; }
-.rc-slot.rc-slot-sel { background:#1D9E75; color:#fff; border-color:#1D9E75; }
-.rc-form-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px; }
-.rc-form-box { background:#fff; border-radius:12px; max-width:460px; width:100%; overflow:hidden; max-height:90vh; overflow-y:auto; }
-.rc-form-head { background:#0F6E56; padding:20px 24px; }
-.rc-form-title { font-size:16px; font-weight:600; color:#fff; }
-.rc-form-sub { font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px; }
-.rc-form-body { padding:20px 24px; }
-.rc-label { font-size:12px; color:#888; margin-bottom:4px; display:block; }
-.rc-input { width:100%; padding:9px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; box-sizing:border-box; margin-bottom:12px; }
-.rc-input:focus { outline:none; border-color:#1D9E75; }
-.rc-select { width:100%; padding:9px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; box-sizing:border-box; margin-bottom:12px; background:#fff; }
-.rc-form-foot { padding:0 24px 20px; display:flex; gap:8px; }
-.rc-btn-ok { flex:1; padding:12px; background:#1D9E75; color:#fff; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
-.rc-btn-ok:hover { background:#0F6E56; }
-.rc-btn-cancel { padding:12px 18px; background:none; border:1px solid #ddd; border-radius:6px; font-size:14px; cursor:pointer; color:#888; }
-.rc-success { text-align:center; padding:32px 24px; }
-.rc-res-item { background:#f8f5ef; border-radius:6px; padding:10px 14px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
-</style>
-
-<script>
-(function(){
-  const WSLOTS = ['09:00','10:00','11:00','12:00','13:00','14:00'];
-  const SSLOTS = ['종일 장거리 운행 (협의)'];
-  const SERVICES = ['펫택시 단거리 (5만원)','펫택시 중거리 (8만원~)','펫택시 장거리 (15만원~)','어르신 병원 동행 기본 (10만원)','어르신 반일 동행 (15만원)','어르신 원정 동행 (20만원~)'];
-  const MAX = 3;
-  let rcCur = new Date();
-  let rcSelDate = null;
-  let rcSelSlot = null;
-  let rcRes = {};
-
-  function dKey(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
-  function isClosed(dow){ return dow===0||dow===4; }
-  function isSat(dow){ return dow===6; }
-  function getBooked(key){ return (rcRes[key]||[]).length; }
-
-  window.rcChangeMonth = function(dir){
-    rcCur.setMonth(rcCur.getMonth()+dir);
-    rcSelDate=null; rcSelSlot=null;
-    document.getElementById('rcSlots').innerHTML='';
-    document.getElementById('rcResList').innerHTML='';
-    rcRender();
-  };
-
-  function rcRender(){
-    const y=rcCur.getFullYear(), m=rcCur.getMonth();
-    document.getElementById('rcTitle').textContent=`${y}년 ${m+1}월`;
-    const grid=document.getElementById('rcGrid');
-    grid.querySelectorAll('.rc-day').forEach(e=>e.remove());
-    const first=new Date(y,m,1).getDay();
-    const last=new Date(y,m+1,0).getDate();
-    const today=new Date();
-    for(let i=0;i<first;i++){
-      const el=document.createElement('div');
-      el.className='rc-day'; grid.appendChild(el);
-    }
-    for(let d=1;d<=last;d++){
-      const el=document.createElement('div');
-      const dow=new Date(y,m,d).getDay();
-      const key=dKey(y,m,d);
-      const isPast=new Date(y,m,d)<new Date(today.getFullYear(),today.getMonth(),today.getDate());
-      const isToday=d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear();
-      const booked=getBooked(key);
-      const slots=isSat(dow)?SSLOTS:WSLOTS;
-      const maxSlots=isSat(dow)?1:MAX*WSLOTS.length;
-      let cls='rc-day';
-      if(isPast) cls+=' rc-past';
-      else if(isClosed(dow)) cls+=' rc-closed';
-      else if(booked>=maxSlots) cls+=' rc-full';
-      else if(isSat(dow)) cls+=' rc-saturday';
-      else cls+=' rc-available';
-      if(isToday) cls+=' rc-today';
-      if(rcSelDate===key) cls+=' rc-selected';
-      el.className=cls;
-      el.innerHTML=`<span class="rc-num">${d}</span><span class="rc-dot"></span>`;
-      if(!isPast&&!isClosed(dow)&&booked<maxSlots){
-        el.onclick=()=>rcSelectDate(key,y,m,d,dow);
-      }
-      grid.appendChild(el);
-    }
-  }
-
-  function rcSelectDate(key,y,m,d,dow){
-    rcSelDate=key; rcSelSlot=null;
-    rcRender();
-    const isSatday=isSat(dow);
-    const dateStr=`${y}년 ${m+1}월 ${d}일${isSatday?' (토요일 장거리)':''}`;
-    const slots=isSatday?SSLOTS:WSLOTS;
-    const booked=rcRes[key]||[];
-    let html=`<div style="background:#f8f5ef;border-radius:8px;padding:16px 18px">
-      <div style="font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:12px">${dateStr} 예약 가능 시간</div>
-      <div style="display:grid;grid-template-columns:repeat(${isSatday?1:3},1fr);gap:8px">`;
-    slots.forEach(slot=>{
-      const isFull=booked.filter(b=>b.slot===slot).length>=(isSatday?1:1);
-      const isSel=rcSelSlot===slot;
-      if(isFull){
-        html+=`<div class="rc-slot rc-slot-full">${slot}<br>마감</div>`;
-      } else {
-        html+=`<div class="rc-slot${isSel?' rc-slot-sel':''}" onclick="rcSelectSlot('${slot}','${key}','${dateStr.replace(/'/g,"\\'")}',${isSatday})">${slot}</div>`;
-      }
-    });
-    html+=`</div></div>`;
-    document.getElementById('rcSlots').innerHTML=html;
-    rcRenderResList(key,dateStr);
-  }
-
-  window.rcSelectSlot = function(slot,key,dateStr,isSat){
-    rcSelSlot=slot;
-    rcOpenForm(slot,key,dateStr,isSat);
-  };
-
-  function rcOpenForm(slot,key,dateStr,isSat){
-    const ol=document.createElement('div');
-    ol.className='rc-form-overlay'; ol.id='rcOverlay';
-    ol.onclick=function(e){ if(e.target===ol) rcCloseForm(); };
-    ol.innerHTML=`<div class="rc-form-box">
-      <div class="rc-form-head">
-        <div class="rc-form-title">예약 신청</div>
-        <div class="rc-form-sub">${dateStr} · ${slot}</div>
-      </div>
-      <div class="rc-form-body">
-        <label class="rc-label">이름</label>
-        <input class="rc-input" id="rc_name" placeholder="홍길동">
-        <label class="rc-label">연락처</label>
-        <input class="rc-input" id="rc_phone" placeholder="010-0000-0000">
-        <label class="rc-label">서비스 선택</label>
-        <select class="rc-select" id="rc_service">
-          <option value="">선택해주세요</option>
-          ${isSat?'<option value="토요일 장거리 종일 운행 (협의)">토요일 장거리 종일 운행 (협의)</option>':SERVICES.map(s=>`<option value="${s}">${s}</option>`).join('')}
-        </select>
-        <label class="rc-label">출발지</label>
-        <input class="rc-input" id="rc_from" placeholder="잠실동 000아파트">
-        ${isSat?`<label class="rc-label">목적지 (지방)</label><input class="rc-input" id="rc_to" placeholder="부산, 대전 등">`:''}
-        <label class="rc-label">메모 (선택)</label>
-        <input class="rc-input" id="rc_memo" placeholder="강아지 2마리, 대형견 등">
-      </div>
-      <div class="rc-form-foot">
-        <button class="rc-btn-cancel" onclick="rcCloseForm()">취소</button>
-        <button class="rc-btn-ok" onclick="rcConfirm('${slot}','${key}','${dateStr.replace(/'/g,"\\'")}')">예약 신청</button>
-      </div>
-    </div>`;
-    document.body.appendChild(ol);
-  }
-
-  window.rcConfirm = function(slot,key,dateStr){
-    const name=document.getElementById('rc_name').value.trim();
-    const phone=document.getElementById('rc_phone').value.trim();
-    const service=document.getElementById('rc_service').value;
-    const from=document.getElementById('rc_from').value.trim();
-    const memo=document.getElementById('rc_memo')?document.getElementById('rc_memo').value.trim():'';
-    if(!name||!phone||!service||!from){ alert('이름, 연락처, 서비스, 출발지는 필수입니다.'); return; }
-    if(!rcRes[key]) rcRes[key]=[];
-    rcRes[key].push({slot,name,phone,service,from,memo});
-    document.getElementById('rcOverlay').querySelector('.rc-form-box').innerHTML=`
-      <div class="rc-success">
-        <div style="font-size:48px;margin-bottom:16px;color:#1D9E75">✓</div>
-        <div style="font-size:18px;font-weight:600;color:#1a1a2e;margin-bottom:8px">예약 신청 완료</div>
-        <div style="font-size:13px;color:#888;line-height:1.8">${dateStr}<br>${slot}<br>${name}님 · ${service}<br><br>확인 후 010-7472-5896으로<br>문자 드리겠습니다.</div>
-        <button class="rc-btn-ok" style="margin-top:20px;width:100%" onclick="rcCloseForm()">확인</button>
-      </div>`;
-    setTimeout(()=>{ rcRender(); const parts=key.split('-'); rcSelectDate(key,parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]),new Date(key).getDay()); },100);
-  };
-
-  window.rcCloseForm = function(){
-    const ol=document.getElementById('rcOverlay');
-    if(ol) ol.remove();
-  };
-
-  function rcRenderResList(key,dateStr){
-    const el=document.getElementById('rcResList');
-    const booked=rcRes[key]||[];
-    if(!booked.length){ el.innerHTML=''; return; }
-    let html=`<div style="font-size:12px;color:#888;margin-bottom:6px">${dateStr} 예약 현황 (${booked.length}건)</div>`;
-    booked.forEach(b=>{
-      html+=`<div class="rc-res-item">
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">예약 & 문의</div>
+    <h2 class="section-title">지금 바로<br>예약하세요</h2>
+    <div class="contact-cards">
+      <a href="tel:010-7472-5896" class="contact-card">
+        <div class="cc-icon">📞</div>
         <div>
-          <div style="font-size:13px;color:#1a1a2e">${b.name} · ${b.phone}</div>
-          <div style="font-size:11px;color:#888;margin-top:2px">${b.service}</div>
+          <div class="cc-label">CALL</div>
+          <div class="cc-value">010 - 7472 - 5896</div>
         </div>
-        <div style="font-size:12px;color:#1D9E75;font-weight:600">${b.slot}</div>
-      </div>`;
-    });
-    el.innerHTML=html;
-  }
-
-  rcRender();
-})();
-</script>
+      </a>
+      <a href="#" class="contact-card">
+        <div class="cc-icon">💬</div>
+        <div>
+          <div class="cc-label">KAKAO</div>
+          <div class="cc-value">카카오톡 채널 @올케어</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/allcare_jamsil" class="contact-card">
+        <div class="cc-icon">📸</div>
+        <div>
+          <div class="cc-label">INSTAGRAM</div>
+          <div class="cc-value">@allcare_jamsil</div>
+        </div>
+      </a>
+    </div>
+    <div class="contact-optime">
+      <strong>운행 가능 시간</strong> 평일 오전 9시 ~ 오후 3시 / 토요일 장거리 종일<br>
+      <strong>예약 마감</strong> 이용일 전날까지 (당일 예약은 카카오톡으로 문의)<br>
+      <strong>서비스 지역</strong> 잠실·송파 중심 / 장거리 전국 운행
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="footer-logo">올케어</div>
   <div class="footer-info">
-    잠실 프리미엄 이동 케어 서비스<br>
+    픽업부터 귀가까지 올케어<br>
     동물운송업 등록 | 서울 송파구 잠실동<br>
-    010-7472-5896
+    010-7472-5896 · @allcare_jamsil
   </div>
 </footer>
 
-<!-- MODALS -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalBox">
-    <div class="modal-header">
-      <div class="modal-tag" id="mTag"></div>
-      <div class="modal-title" id="mTitle"></div>
-      <div class="modal-price-hero" id="mPrice"></div>
-      <button class="modal-close" onclick="closeModalDirect()">✕</button>
-    </div>
-    <div class="modal-body" id="mBody"></div>
-  </div>
-</div>
-
 <script>
-  // Intersection Observer for animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 100);
+function switchTab(tab, btn) {
+  document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active', 'green'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  if (tab === 'senior') btn.classList.add('green');
+}
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 120);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.why-card').forEach(el => obs.observe(el));
+
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.pi-bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => { bar.style.width = w; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.pricing-infographic').forEach(el => barObs.observe(el));
+
+/* ──────────────────────────────────────────
+   관리자 패널 — 로고 3번 클릭으로 열기
+   토요일 ON/OFF 토글
+────────────────────────────────────────── */
+(function(){
+  // 토요일 상태 (기본: ON)
+  let satOpen = localStorage.getItem('allcare_sat') !== 'off';
+
+  // 토요일 상태를 캘린더에 반영하는 함수 (캘린더 있을 경우)
+  function applySatState() {
+    const satCells = document.querySelectorAll('.rc-day.rc-saturday, .rc-day.rc-sat-closed');
+    satCells.forEach(el => {
+      if (!satOpen) {
+        el.classList.remove('rc-saturday');
+        el.classList.add('rc-closed', 'rc-sat-closed');
+      } else {
+        el.classList.remove('rc-closed', 'rc-sat-closed');
+        el.classList.add('rc-saturday');
       }
     });
-  }, { threshold: 0.1 });
+    // rcRender가 있으면 재렌더
+    if (typeof rcRender === 'function') rcRender();
+  }
 
-  document.querySelectorAll('.why-item, .schedule-item').forEach(el => {
-    observer.observe(el);
-  });
-
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-      nav.style.borderBottomColor = 'rgba(201,168,76,0.1)';
-    } else {
-      nav.style.borderBottomColor = 'rgba(255,255,255,0.05)';
-    }
-  });
-
-  // MODAL DATA
-  const modals = {
-
-    pet_short: {
-      tag: '반려동물 이동 · 단거리',
-      title: '10km 이내\n픽업·귀가 서비스',
-      price: '5만원',
-      includes: [
-        '출발지 도착 후 반려동물 탑승 확인',
-        '케이지 고정 및 안전 세팅',
-        '목적지 (동물병원·미용샵·훈련소 등) 안전 이동',
-        '도착 후 인도 및 상태 확인',
-        '이동 중 반려동물 사진 1~2장 보호자 전송',
-        '방수 시트커버·소독 완비 차량'
-      ],
-      excludes: [
-        '병원 대기·접수는 포함되지 않음 (대기 옵션 별도 협의)',
-        '10km 초과 시 중거리 요금 적용'
-      ],
-      details: [
-        { label: '운행 거리', value: '10km 이내' },
-        { label: '소요 시간', value: '약 30~50분' },
-        { label: '보호자 동반', value: '선택 (동반/단독 모두 가능)' },
-        { label: '예약 마감', value: '전날까지' }
-      ]
-    },
-
-    pet_solo: {
-      tag: '반려동물 이동 · 단독',
-      title: '보호자 없이\n반려동물 혼자 이동',
-      price: '4만원~',
-      includes: [
-        '출발지에서 반려동물 인수 (보호자 확인 후 출발)',
-        '목적지 담당자에게 직접 인도',
-        '이동 중 반려동물 상태 사진 실시간 전송',
-        '도착 확인 문자 발송',
-        '케이지·안전펜스 완비'
-      ],
-      excludes: [
-        '반려동물이 극도로 예민하거나 공격성 있는 경우 사전 협의 필요',
-        '목적지에 인수자가 반드시 있어야 함'
-      ],
-      details: [
-        { label: '대상', value: '강아지·고양이 모두 가능' },
-        { label: '인수 방식', value: '출발지 보호자 → 기사 → 목적지 담당자' },
-        { label: '실시간 공유', value: '이동 중 사진 전송' },
-        { label: '예약 마감', value: '전날까지' }
-      ]
-    },
-
-    pet_mid: {
-      tag: '반려동물 이동 · 중거리',
-      title: '10~30km\n중거리 이동 서비스',
-      price: '8만원~',
-      includes: [
-        '출발지 픽업 후 목적지 직행',
-        '강남·서초·강동·성남·분당·하남 전 지역 커버',
-        '대형견 (40kg 이상) 탑승 가능 — 카카오T 불가 구간',
-        '이동 중 사진 실시간 전송',
-        '왕복 예약 시 10% 할인'
-      ],
-      excludes: [
-        '30km 초과 시 장거리 요금 적용'
-      ],
-      details: [
-        { label: '운행 거리', value: '10~30km' },
-        { label: '소요 시간', value: '약 40분~1시간 30분' },
-        { label: '대형견', value: '40kg 이상도 가능' },
-        { label: '왕복 할인', value: '10%' }
-      ]
-    },
-
-    pet_long: {
-      tag: '반려동물 이동 · 장거리',
-      title: '30km+ 전국\n장거리 이동 서비스',
-      price: '15만원~',
-      includes: [
-        '서울 출발 전국 어디든 운행 가능',
-        '반려동물 동반 여행 픽업',
-        '지방 동물병원 원정 진료 이동',
-        '귀성·이사 시 반려동물 별도 이송',
-        '반려동물 단독 탁송 가능 (전국)',
-        '이동 중 실시간 위치·사진 공유'
-      ],
-      excludes: [
-        '왕복 당일 운행은 30만원~',
-        '고속도로 통행료는 실비 청구'
-      ],
-      details: [
-        { label: '운행 범위', value: '전국 (제주 제외)' },
-        { label: '기준 단가', value: '거리·시간에 따라 협의' },
-        { label: '탁송', value: '반려동물 단독 전국 가능' },
-        { label: '예약', value: '최소 2일 전' }
-      ]
-    },
-
-    silver_basic: {
-      tag: '어르신 병원 동행 · 기본',
-      title: '픽업부터 귀가까지\n기본 동행 (3시간)',
-      price: '10만원',
-      includes: [
-        '자택 자차 픽업',
-        '병원 접수·수납·키오스크 대신 처리',
-        '진료실 앞 대기 및 필요시 동행 입실',
-        '처방전·약 수령',
-        '자택 귀가 후 안전 확인',
-        '진료 내용 정리 후 보호자(자녀)께 문자 전달',
-        '교통비·주차비 추가 없음 — 이게 최종 금액'
-      ],
-      excludes: [
-        '3시간 초과 시 30분당 1만원 추가',
-        '의료적 처치나 투약 행위는 불가'
-      ],
-      details: [
-        { label: '포함 범위', value: '픽업→접수→대기→귀가 일체' },
-        { label: '추가 비용', value: '없음 (교통비 포함)' },
-        { label: '진료 전달', value: '보호자께 문자 전달 포함' },
-        { label: '예약 마감', value: '전날까지' }
-      ]
-    },
-
-    silver_half: {
-      tag: '어르신 병원 동행 · 반일',
-      title: '복수 검사·긴 대기\n반일 동행 (3~5시간)',
-      price: '15만원',
-      includes: [
-        '자택 자차 픽업',
-        'CT·MRI·내시경·혈액검사 등 복수 검사 동행',
-        '검사실 이동 안내 및 대기 동행',
-        '점심·간식 등 식사 보조 (필요시)',
-        '처방전·약 수령 후 귀가',
-        '전체 진료·검사 내용 정리 후 보호자 전달',
-        '교통비 포함 — 최종 금액'
-      ],
-      excludes: [
-        '5시간 초과 시 30분당 1만원 추가'
-      ],
-      details: [
-        { label: '대상', value: '복수 검사·장시간 대기 필요한 경우' },
-        { label: '소요 시간', value: '3~5시간' },
-        { label: '식사 보조', value: '필요시 포함' },
-        { label: '보고', value: '검사 결과 전 항목 정리 전달' }
-      ]
-    },
-
-    silver_major: {
-      tag: '어르신 병원 동행 · 원정',
-      title: '대형병원 원정\n동행 서비스',
-      price: '20만원~',
-      includes: [
-        '서울아산·삼성서울·세브란스·서울대 등 대형병원',
-        '복잡한 대형병원 내 동선 안내',
-        '여러 과 진료 연속 동행',
-        '검사 결과 설명 보조',
-        '필요시 휠체어 지원',
-        '귀가 후 보호자 상세 보고',
-        '장거리 포함 교통비 없음 — 최종 금액'
-      ],
-      excludes: [
-        '거리·시간에 따라 요금 협의 가능',
-        '의료 통역·전문 의료 상담은 불가'
-      ],
-      details: [
-        { label: '대상 병원', value: '5대 대형병원 포함 전국' },
-        { label: '소요 시간', value: '5~8시간 (경우에 따라 상이)' },
-        { label: '동선 지원', value: '복잡한 내부 안내 포함' },
-        { label: '예약', value: '최소 2일 전' }
-      ]
-    },
-
-    silver_monthly: {
-      tag: '어르신 병원 동행 · 월정액',
-      title: '정기 동행\n월정액 패키지 (월 4회)',
-      price: '40만원~',
-      includes: [
-        '재활치료·투석·항암 등 주 1회 정기 병원 방문',
-        '매회 픽업→동행→귀가 전 과정 포함',
-        '담당 기사 고정 배정 (신뢰 형성)',
-        '진료 내용 월간 기록 정리 제공',
-        '긴급 추가 동행 시 우선 배정',
-        '교통비 포함 — 최종 금액'
-      ],
-      excludes: [
-        '월 4회 초과 시 건당 8만원 추가',
-        '1개월 단위 선결제'
-      ],
-      details: [
-        { label: '횟수', value: '월 4회 (주 1회)' },
-        { label: '담당 기사', value: '고정 배정' },
-        { label: '건당 환산', value: '10만원 → 8만원 절약' },
-        { label: '결제', value: '월 선결제' }
-      ]
-    }
-
-  };
-
-  function openModal(key) {
-    const d = modals[key];
-    if (!d) return;
-
-    document.getElementById('mTag').textContent = d.tag;
-    document.getElementById('mTitle').textContent = d.title;
-    document.getElementById('mPrice').textContent = d.price;
-
-    let html = '';
-
-    // Includes
-    html += `<div class="modal-section">
-      <div class="modal-section-title">포함 내용</div>
-      <ul class="modal-checklist">
-        ${d.includes.map(i => `<li>${i}</li>`).join('')}
-      </ul>
-    </div>`;
-
-    // Excludes
-    if (d.excludes && d.excludes.length) {
-      html += `<div class="modal-section">
-        <div class="modal-section-title">유의 사항</div>
-        <ul class="modal-checklist">
-          ${d.excludes.map(i => `<li class="warn">${i}</li>`).join('')}
-        </ul>
-      </div>`;
-    }
-
-    // Details grid
-    if (d.details && d.details.length) {
-      html += `<div class="modal-section">
-        <div class="modal-section-title">상세 정보</div>
-        <div class="modal-detail-grid">
-          ${d.details.map(item => `
-            <div class="modal-detail-item">
-              <div class="modal-detail-label">${item.label}</div>
-              <div class="modal-detail-value">${item.value}</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>`;
-    }
-
-    // CTA
-    html += `
-      <a href="tel:010-7472-5896" class="modal-cta">📞 010-7472-5896 전화 예약</a>
-      <div class="modal-note">카카오톡 @올케어 로도 문의 가능합니다<br>예약은 이용일 전날까지</div>
+  // 관리자 패널 HTML
+  function openAdmin() {
+    if (document.getElementById('adminPanel')) return;
+    const panel = document.createElement('div');
+    panel.id = 'adminPanel';
+    panel.style.cssText = `
+      position:fixed; bottom:24px; right:24px; z-index:99999;
+      background:white; border-radius:20px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.2);
+      padding:28px 32px; min-width:280px;
+      font-family:'Noto Sans KR',sans-serif;
+      animation: adminSlideUp 0.3s ease;
     `;
 
-    document.getElementById('mBody').innerHTML = html;
-    document.getElementById('modalOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes adminSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+      .admin-toggle { display:flex; align-items:center; justify-content:space-between; margin-top:16px; }
+      .toggle-switch { position:relative; width:52px; height:28px; cursor:pointer; }
+      .toggle-switch input { opacity:0; width:0; height:0; }
+      .toggle-slider {
+        position:absolute; inset:0; border-radius:28px;
+        background:#e0d8d0; transition:0.3s;
+      }
+      .toggle-slider::before {
+        content:''; position:absolute;
+        width:20px; height:20px; border-radius:50%;
+        background:white; top:4px; left:4px;
+        transition:0.3s; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      }
+      .toggle-switch input:checked + .toggle-slider { background:#7a9e7e; }
+      .toggle-switch input:checked + .toggle-slider::before { transform:translateX(24px); }
+      .sat-status { font-size:13px; font-weight:700; }
+      .sat-on { color:#7a9e7e; }
+      .sat-off { color:#e05050; }
+    `;
+    document.head.appendChild(style);
+
+    panel.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-family:'Noto Serif KR',serif;font-size:16px;font-weight:900;color:#3d2b1f">⚙️ 관리자 설정</div>
+        <button onclick="document.getElementById('adminPanel').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#8b6b4a;line-height:1">×</button>
+      </div>
+      <div style="font-size:11px;color:#a89880;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #f0e8e0">올케어 운영 관리</div>
+
+      <div style="font-size:12px;font-weight:700;color:#8b6b4a;letter-spacing:1px;margin-bottom:12px">토요일 운영</div>
+
+      <div class="admin-toggle">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#3d2b1f">토요일 장거리 운행</div>
+          <div id="satStatusTxt" class="sat-status ${satOpen?'sat-on':'sat-off'}">${satOpen?'✅ 운영 중':'❌ 운영 중단'}</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="satToggle" ${satOpen?'checked':''} onchange="toggleSat(this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div id="satNote" style="margin-top:14px;padding:12px 14px;border-radius:10px;font-size:12px;line-height:1.7;background:${satOpen?'rgba(122,158,126,0.1)':'rgba(224,80,80,0.08)'};color:${satOpen?'#5a8060':'#c04040'}">
+        ${satOpen
+          ? '토요일 예약 캘린더에 <strong>초록색(장거리)</strong>으로 표시됩니다.'
+          : '토요일이 <strong>휴무</strong>로 표시됩니다. 예약 불가.'}
+      </div>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid #f0e8e0;font-size:11px;color:#c0a888;text-align:center">
+        로고 3번 클릭으로 열기 · 설정은 브라우저에 저장됩니다
+      </div>
+    `;
+
+    document.body.appendChild(panel);
   }
 
-  function closeModal(e) {
-    if (e.target === document.getElementById('modalOverlay')) {
-      closeModalDirect();
+  window.toggleSat = function(isOn) {
+    satOpen = isOn;
+    localStorage.setItem('allcare_sat', isOn ? 'on' : 'off');
+    document.getElementById('satStatusTxt').textContent = isOn ? '✅ 운영 중' : '❌ 운영 중단';
+    document.getElementById('satStatusTxt').className = 'sat-status ' + (isOn ? 'sat-on' : 'sat-off');
+    document.getElementById('satNote').style.background = isOn ? 'rgba(122,158,126,0.1)' : 'rgba(224,80,80,0.08)';
+    document.getElementById('satNote').style.color = isOn ? '#5a8060' : '#c04040';
+    document.getElementById('satNote').innerHTML = isOn
+      ? '토요일 예약 캘린더에 <strong>초록색(장거리)</strong>으로 표시됩니다.'
+      : '토요일이 <strong>휴무</strong>로 표시됩니다. 예약 불가.';
+    // 캘린더 재렌더
+    if (typeof rcChangeMonth === 'function') {
+      // rcCur, rcSelDate 초기화 후 재렌더
+      if (typeof window._rcForceRerender === 'function') window._rcForceRerender();
     }
+    if (typeof rcRender === 'function') rcRender();
+  };
+
+  // PIN 확인 후 관리자 패널 열기
+  const ADMIN_PIN = 'dkstmdgh84!';
+
+  function askPin() {
+    if (document.getElementById('pinOverlay')) return;
+    const ol = document.createElement('div');
+    ol.id = 'pinOverlay';
+    ol.style.cssText = `
+      position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      display:flex; align-items:center; justify-content:center;
+      z-index:99999;
+    `;
+    ol.innerHTML = `
+      <div style="background:white;border-radius:20px;padding:32px 36px;width:300px;text-align:center;font-family:'Noto Sans KR',sans-serif;box-shadow:0 24px 60px rgba(0,0,0,0.2)">
+        <div style="font-size:28px;margin-bottom:12px">🔐</div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:16px;font-weight:900;color:#3d2b1f;margin-bottom:6px">관리자 확인</div>
+        <div style="font-size:12px;color:#a89880;margin-bottom:20px">비밀번호를 입력하세요</div>
+        <div style="position:relative;margin-bottom:14px">
+          <input id="pinInput"
+            type="password"
+            autocomplete="off"
+            placeholder="비밀번호"
+            onkeydown="if(event.key==='Enter')pinSubmit()"
+            style="width:100%;padding:13px 44px 13px 16px;border:1.5px solid rgba(212,129,58,0.3);border-radius:12px;font-size:15px;box-sizing:border-box;font-family:'Noto Sans KR',sans-serif;outline:none;transition:border 0.2s"
+            onfocus="this.style.borderColor='#d4813a'"
+            onblur="this.style.borderColor='rgba(212,129,58,0.3)'"
+          >
+          <span id="pinEye" onclick="togglePinVis()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none">👁️</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onclick="pinCancel()" style="padding:13px;border:1.5px solid rgba(220,80,80,0.2);border-radius:12px;font-size:14px;font-weight:600;background:white;cursor:pointer;color:#c04040;font-family:'Noto Sans KR',sans-serif">취소</button>
+          <button onclick="pinSubmit()" style="padding:13px;border:none;border-radius:12px;font-size:14px;font-weight:700;background:linear-gradient(135deg,#c07830,#d4813a);cursor:pointer;color:white;font-family:'Noto Sans KR',sans-serif">확인</button>
+        </div>
+        <div id="pinError" style="margin-top:12px;font-size:12px;color:#e05050;height:16px"></div>
+      </div>
+    `;
+    document.body.appendChild(ol);
+    setTimeout(() => document.getElementById('pinInput').focus(), 100);
   }
 
-  function closeModalDirect() {
-    document.getElementById('modalOverlay').classList.remove('active');
-    document.body.style.overflow = '';
+  window.togglePinVis = function() {
+    const inp = document.getElementById('pinInput');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  };
+
+  window.pinSubmit = function() {
+    const val = document.getElementById('pinInput').value;
+    if (val === ADMIN_PIN) {
+      document.getElementById('pinOverlay').remove();
+      openAdmin();
+    } else {
+      const err = document.getElementById('pinError');
+      const inp = document.getElementById('pinInput');
+      err.textContent = '❌ 비밀번호가 틀렸습니다';
+      inp.style.borderColor = '#e05050';
+      inp.value = '';
+      setTimeout(() => {
+        err.textContent = '';
+        inp.style.borderColor = 'rgba(212,129,58,0.3)';
+        inp.focus();
+      }, 900);
+    }
+  };
+
+  window.pinCancel = function() {
+    const ol = document.getElementById('pinOverlay');
+    if (ol) ol.remove();
+  };
+
+  // 로고 3번 클릭 감지
+  let logoClickCount = 0, logoTimer = null;
+  const logo = document.querySelector('.nav-logo');
+  if (logo) {
+    logo.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoClickCount++;
+      clearTimeout(logoTimer);
+      logoTimer = setTimeout(() => { logoClickCount = 0; }, 600);
+      if (logoClickCount >= 3) {
+        logoClickCount = 0;
+        askPin(); // openAdmin() 대신 PIN 먼저
+      }
+    });
   }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModalDirect();
-  });
+  // 토요일 상태를 캘린더 isSat 함수에 주입
+  // rcRender가 정의된 후 satOpen 참조를 공유
+  window.getSatOpen = function() { return satOpen; };
+
+})();
 </script>
-
 </body>
 </html>
